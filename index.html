@@ -64,13 +64,18 @@
       display: flex;
       align-items: center;
     }
-    .circle-icon-img {
+    .circle-icon {
       width: 36px;
       height: 36px;
+      background-color: #673ab7;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
       border-radius: 50%;
-      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-right: 10px;
-      background-color: #eee;
     }
     .place-info {
       display: flex;
@@ -83,11 +88,6 @@
     .place-info span {
       font-size: 13px;
       color: #888;
-    }
-    .card-header-right {
-      font-size: 18px;
-      color: #999;
-      cursor: pointer;
     }
     .card img {
       width: 100%;
@@ -118,13 +118,13 @@
     <div class="card" id="result">
       <div class="card-header">
         <div class="card-header-left">
-          <img src="spoon-fork-icon.png" alt="아이콘" class="circle-icon-img" />
+          <div class="circle-icon">🍽️</div>
           <div class="place-info">
             <strong id="foodName">음식 이름</strong>
             <span id="foodType">음식 종류</span>
           </div>
         </div>
-        <div class="card-header-right" onclick="showRecommendation()">⟳</div>
+        <div class="card-header-right">⟳</div>
       </div>
       <img id="foodImage" src="" alt="추천 이미지">
       <div class="card-footer">
