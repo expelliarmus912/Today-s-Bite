@@ -89,11 +89,6 @@
       font-size: 13px;
       color: #888;
     }
-    .card-header-right {
-      font-size: 18px;
-      color: #999;
-      cursor: pointer;
-    }
     .card img {
       width: 100%;
       height: 320px;
@@ -123,15 +118,15 @@
     <div class="card" id="result">
       <div class="card-header">
         <div class="card-header-left">
-          <div class="circle-icon">🍣</div>
+          <div class="circle-icon">🍽️</div>
           <div class="place-info">
-            <strong id="foodName">신선한 초밥집</strong>
-            <span>일식</span>
+            <strong id="foodName">음식 이름</strong>
+            <span id="foodType">음식 종류</span>
           </div>
         </div>
         <div class="card-header-right">⟳</div>
       </div>
-      <img id="foodImage" src="https://images.unsplash.com/photo-1603094912203-04238efb91e4?auto=format&fit=crop&w=800&q=80" alt="추천 이미지">
+      <img id="foodImage" src="" alt="추천 이미지">
       <div class="card-footer">
         <span onclick="showRecommendation()">💡 다음 추천</span>
         <span onclick="shareResult()">📤 공유하기</span>
@@ -142,25 +137,26 @@
   <script>
     const restaurants = [
       {
-        name: "신선한 초밥집",
-        type: "일식",
-        img: "https://images.unsplash.com/photo-1603094912203-04238efb91e4?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        name: "마라공방",
-        type: "중식",
-        img: "https://images.unsplash.com/photo-1626178793534-1b76a3a3d4a3?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        name: "도시락고",
+        name: "매운 라면",
         type: "한식",
-        img: "https://images.unsplash.com/photo-1631515243344-abc97f1fba32?auto=format&fit=crop&w=800&q=80"
+        img: "sample-food-1.jpg"
+      },
+      {
+        name: "연어 초밥",
+        type: "일식",
+        img: "sample-food-2.jpg"
+      },
+      {
+        name: "불고기 정식",
+        type: "한식",
+        img: "sample-food-3.jpg"
       }
     ];
 
     function showRecommendation() {
       const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
       document.getElementById('foodName').textContent = pick.name;
+      document.getElementById('foodType').textContent = pick.type;
       document.getElementById('foodImage').src = pick.img;
 
       document.getElementById('start-screen').style.display = 'none';
@@ -168,7 +164,7 @@
     }
 
     function shareResult() {
-      alert("공유 기능은 브라우저에서 지원되는 경우에만 작동합니다.");
+      alert("브라우저에서 지원되지 않는 공유 기능입니다.");
     }
   </script>
 </body>
