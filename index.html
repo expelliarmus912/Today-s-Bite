@@ -15,6 +15,7 @@
       align-items: center;
       height: 100vh;
     }
+
     .container {
       background-color: #f4f4f4;
       border-radius: 20px;
@@ -24,14 +25,17 @@
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
+
     #start-screen {
       text-align: center;
     }
+
     h1 {
       font-size: 1.8rem;
       color: #0d47a1;
       margin-bottom: 30px;
     }
+
     .btn {
       padding: 14px 24px;
       border: none;
@@ -44,6 +48,7 @@
       cursor: pointer;
       margin-top: 10px;
     }
+
     .card {
       display: none;
       background: #ffffff;
@@ -53,6 +58,7 @@
       text-align: left;
       font-size: 14px;
     }
+
     .card-header {
       display: flex;
       align-items: center;
@@ -60,40 +66,41 @@
       padding: 12px 16px;
       border-bottom: 1px solid #eee;
     }
+
     .card-header-left {
       display: flex;
       align-items: center;
     }
+
     .circle-icon {
       width: 36px;
       height: 36px;
-      background-color: #673ab7;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      object-fit: cover;
       margin-right: 10px;
     }
+
     .place-info {
       display: flex;
       flex-direction: column;
     }
+
     .place-info strong {
       font-size: 15px;
       color: #333;
     }
+
     .place-info span {
       font-size: 13px;
       color: #888;
     }
+
     .card img {
       width: 100%;
       height: 320px;
       object-fit: cover;
     }
+
     .card-footer {
       display: flex;
       justify-content: space-around;
@@ -101,6 +108,7 @@
       padding: 12px 8px;
       border-top: 1px solid #eee;
     }
+
     .card-footer span {
       color: #2196f3;
       font-weight: bold;
@@ -118,7 +126,7 @@
     <div class="card" id="result">
       <div class="card-header">
         <div class="card-header-left">
-          <div class="circle-icon">🍽️</div>
+          <img class="circle-icon" src="spoon-fork-icon.png" alt="음식 아이콘">
           <div class="place-info">
             <strong id="foodName">음식 이름</strong>
             <span id="foodType">음식 종류</span>
@@ -169,3 +177,4 @@
   </script>
 </body>
 </html>
+
