@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>오늘 뭐 먹지?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #b3e5fc;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #f4f4f4;
+      border-radius: 20px;
+      padding: 40px 24px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    #start-screen {
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #0d47a1;
+      margin-bottom: 30px;
+    }
+    .btn {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 12px;
+      background: #2196f3;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .card {
+      display: none;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: left;
+      font-size: 14px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+    }
+    .card-header-left {
+      display: flex;
+      align-items: center;
+    }
+    .circle-icon {
+      width: 36px;
+      height: 36px;
+      background-color: #673ab7;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+    }
+    .place-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .place-info strong {
+      font-size: 15px;
+      color: #333;
+    }
+    .place-info span {
+      font-size: 13px;
+      color: #888;
+    }
+    .card-header-right {
+      font-size: 18px;
+      color: #999;
+      cursor: pointer;
+    }
+    .card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 12px 8px;
+      border-top: 1px solid #eee;
+    }
+    .card-footer span {
+      color: #2196f3;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="start-screen">
+      <h1>오늘 뭐 먹지?</h1>
+      <button class="btn" onclick="showRecommendation()">추천받기</button>
+    </div>
+
+    <div class="card" id="result">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div class="circle-icon">🍣</div>
+          <div class="place-info">
+            <strong id="foodName">신선한 초밥집</strong>
+            <span>일식</span>
+          </div>
+        </div>
+        <div class="card-header-right">⟳</div>
+      </div>
+      <img id="foodImage" src="https://images.unsplash.com/photo-1603094912203-04238efb91e4?auto=format&fit=crop&w=800&q=80" alt="추천 이미지">
+      <div class="card-footer">
+        <span onclick="showRecommendation()">💡 다음 추천</span>
+        <span onclick="shareResult()">📤 공유하기</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const restaurants = [
+      {
+        name: "신선한 초밥집",
+        type: "일식",
+        img: "https://images.unsplash.com/photo-1603094912203-04238efb91e4?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "마라공방",
+        type: "중식",
+        img: "https://images.unsplash.com/photo-1626178793534-1b76a3a3d4a3?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "도시락고",
+        type: "한식",
+        img: "https://images.unsplash.com/photo-1631515243344-abc97f1fba32?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    function showRecommendation() {
+      const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+      document.getElementById('foodName').textContent = pick.name;
+      document.getElementById('foodImage').src = pick.img;
+
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+    }
+
+    function shareResult() {
+      alert("공유 기능은 브라우저에서 지원되는 경우에만 작동합니다.");
+    }
+  </script>
+</body>
+</html>
