@@ -71,17 +71,18 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      overflow: hidden;
       background-color: #03a9f4;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 10px;
+      overflow: hidden;
     }
 
     .circle-icon img {
       width: 18px;
       height: 18px;
+      object-fit: contain;
     }
 
     .place-info {
@@ -137,14 +138,14 @@
       <div class="card-header">
         <div class="card-header-left">
           <div class="circle-icon">
-            <img src="spoon-fork-icon.png" alt="아이콘">
+            <img src="spoon-fork-icon.png" alt="숟가락포크아이콘">
           </div>
           <div class="place-info">
             <strong id="foodName">음식 이름</strong>
             <span id="foodType">음식 종류</span>
           </div>
         </div>
-        <div class="card-header-right">⟳</div>
+        <div class="card-header-right" onclick="showRecommendation()">⟳</div>
       </div>
       <img id="foodImage" src="" alt="추천 이미지">
       <div class="card-footer">
@@ -189,5 +190,6 @@
   </script>
 </body>
 </html>
+
 
 
