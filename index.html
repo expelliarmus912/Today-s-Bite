@@ -67,15 +67,14 @@
     .circle-icon {
       width: 36px;
       height: 36px;
-      background-color: #673ab7;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin-right: 10px;
+      overflow: hidden;
+    }
+    .circle-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .place-info {
       display: flex;
@@ -118,7 +117,9 @@
     <div class="card" id="result">
       <div class="card-header">
         <div class="card-header-left">
-          <div class="circle-icon">🍽️</div>
+          <div class="circle-icon">
+            <img src="spoon-fork-icon.png" alt="아이콘" />
+          </div>
           <div class="place-info">
             <strong id="foodName">음식 이름</strong>
             <span id="foodType">음식 종류</span>
@@ -169,5 +170,3 @@
   </script>
 </body>
 </html>
-
-
