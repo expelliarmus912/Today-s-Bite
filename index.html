@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -43,9 +43,8 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: transform 0.2s;
     }
-
     .btn:active {
-      transform: scale(0.98);
+      transform: scale(0.96);
     }
 
     .card {
@@ -109,7 +108,6 @@
     .card-img-container {
       width: 100%;
       height: 280px;
-      background: #e0f7fa; /* 연한 블루, 로딩 중 배경 */
     }
 
     .card-img-container img {
@@ -146,7 +144,7 @@
     <div class="card" id="result">
       <div class="card-header">
         <div class="circle-icon">
-          <img src="spoon-fork-icon.png" alt="아이콘">
+          <img src="spoon-fork-icon.png" alt="숟가락포크아이콘">
         </div>
         <div class="place-info">
           <strong id="foodName">음식 이름</strong>
@@ -154,9 +152,11 @@
         </div>
         <div class="card-header-right" onclick="showRecommendation()">⟳</div>
       </div>
+
       <div class="card-img-container">
         <img id="foodImage" src="" alt="추천 이미지">
       </div>
+
       <div class="card-footer">
         <span onclick="showRecommendation()">💡 다음 추천</span>
         <span onclick="shareResult()">📤 공유하기</span>
@@ -166,21 +166,9 @@
 
   <script>
     const restaurants = [
-      {
-        name: "매운 라면",
-        type: "한식",
-        img: "sample-food-1.jpg"
-      },
-      {
-        name: "연어 초밥",
-        type: "일식",
-        img: "sample-food-2.jpg"
-      },
-      {
-        name: "불고기 정식",
-        type: "한식",
-        img: "sample-food-3.jpg"
-      }
+      { name: "매운 라면", type: "한식", img: "sample-food-1.jpg" },
+      { name: "연어 초밥", type: "일식", img: "sample-food-2.jpg" },
+      { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
     ];
 
     function showRecommendation() {
@@ -194,11 +182,10 @@
     }
 
     function shareResult() {
-      alert("브라우저에서 지원되지 않는 공유 기능입니다.");
+      alert("이 브라우저는 공유 기능을 지원하지 않습니다.");
     }
   </script>
 </body>
 </html>
-
 
 
