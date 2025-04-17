@@ -4,46 +4,45 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- 한글 전용 서체 -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap"
+    rel="stylesheet"
+  />
   <style>
-    /* reset & box-sizing */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       height: 100vh;
-      background-color: #b3e5fc;               /* 연하늘 배경 */
-      font-family: 'Noto Sans KR', sans-serif; /* 한글 전용 글꼴 */
+      background-color: #b3e5fc;
+      font-family: 'Noto Sans KR', sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;          /* 위-중앙-아래 간격 배분 */
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
-      padding: 60px 0;                          /* 상하 여유 */
+      padding: 100px 0;        /* 위아래 여유 더 늘림 */
     }
 
-    /* 타이틀 */
+    /* ── 제목 ── */
     .title {
-      font-size: 2.4rem;     /* 시안 비율에 맞춰 키움 */
+      font-size: 2.6rem;
       line-height: 1.2;
-      color: #0D3F67;        /* 진한 네이비 */
-      font-weight: 700;
+      color: #0D3F67;
+      font-weight: 900;         /* 아주 두껍게 */
+      margin-bottom: 40px;      /* 원과의 간격 키움 */
     }
 
-    /* 원형 아이콘 */
+    /* ── 원형 이미지 ── */
     .circle {
-      width: 240px;
-      height: 240px;
-      background-color: #81d4fa; /* 원 배경 */
+      width: 180px;
+      height: 180px;
+      background-color: #81d4fa;
       border-radius: 50%;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-bottom: 50px;
     }
     .circle img {
       width: 100%;
@@ -51,26 +50,29 @@
       object-fit: cover;
     }
 
-    /* 추천받기 버튼 */
-    .btn {
-      width: 80%;
-      max-width: 300px;
-      padding: 16px 0;
+    /* ── 버튼 컨테이너 ── */
+    .btn-container {
       background-color: #ffffff;
-      color: #0D3F67;
-      font-size: 1.2rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 30px;
+      border-radius: 16px;      /* 작게 깎인 사각형 */
+      padding: 12px 0;
+      width: 220px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background: transparent;
+      border: none;
+      color: #0D3F67;
+      font-size: 1.3rem;
+      font-weight: 900;
       cursor: pointer;
-      transition: transform 0.1s;
     }
     .btn:active {
       transform: scale(0.96);
     }
 
-    /* ── 추천 결과 카드 ── */
+    /* ── 결과 카드 ── (이하 기존과 동일) ── */
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -81,7 +83,8 @@
       border-radius: 20px;
       box-shadow: 0 6px 24px rgba(0,0,0,0.2);
       overflow: hidden;
-      margin-bottom: 40px; /* 하단 여유 */
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
     .card-header {
       display: flex;
@@ -91,8 +94,7 @@
       border-bottom: 1px solid #eee;
     }
     .circle-icon {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       background-color: #29b6f6;
       display: flex;
@@ -101,22 +103,14 @@
       margin-right: 10px;
     }
     .circle-icon img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
+      width: 24px; height: 24px; object-fit: contain;
     }
-    .place-info {
-      display: flex;
-      flex-direction: column;
-    }
+    .place-info { display: flex; flex-direction: column; }
     .place-info strong {
-      font-size: 16px;
-      color: #222;
+      font-size: 16px; color: #222;
     }
     .place-info span {
-      font-size: 13px;
-      color: #666;
-      margin-top: 2px;
+      font-size: 13px; color: #666; margin-top: 2px;
     }
     .card-header-right {
       margin-left: auto;
@@ -130,10 +124,7 @@
       aspect-ratio: 1/1;
     }
     .card-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .card-footer {
       display: flex;
@@ -151,19 +142,18 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- 시작 화면 -->
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
     <div class="circle">
       <img src="boy-icon1.png" alt="아이 이미지" />
     </div>
-    <button class="btn" onclick="showRecommendation()">추천받기</button>
+    <div class="btn-container">
+      <button class="btn" onclick="showRecommendation()">추천받기</button>
+    </div>
   </div>
 
-  <!-- 결과 화면 -->
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
@@ -200,7 +190,6 @@
       document.getElementById('startScreen').style.display = 'none';
       document.getElementById('resultScreen').style.display = 'flex';
     }
-
     function shareResult() {
       alert("공유 기능은 현재 브라우저에서 지원되지 않을 수 있습니다.");
     }
