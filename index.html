@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      background-color: #b3e5fc; /* 배경 하늘색 */
+      background-color: #b3e5fc;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
@@ -17,13 +17,21 @@
     }
 
     .container {
-      /* ★ 배경, 그림자, 패딩 제거 */
       background: none;
       padding: 0;
       border-radius: 0;
       box-shadow: none;
       width: 100%;
       max-width: 440px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      overflow: hidden;
+      padding: 30px 20px;
+      text-align: center;
     }
 
     h1 {
@@ -49,9 +57,9 @@
       transform: scale(0.97);
     }
 
-    .card {
+    .recommend-card {
       margin-top: 20px;
-      background: #ffffff; /* 카드만 흰색 */
+      background: #ffffff;
       border-radius: 16px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.15);
       overflow: hidden;
@@ -139,12 +147,14 @@
 
 <body>
   <div class="container">
-    <div id="start-screen">
+    <!-- 시작 카드 -->
+    <div class="card" id="start-screen">
       <h1>오늘 뭐 먹지?</h1>
       <button class="btn" onclick="showRecommendation()">추천받기</button>
     </div>
 
-    <div class="card" id="result">
+    <!-- 추천 결과 카드 -->
+    <div class="recommend-card" id="result">
       <div class="card-header">
         <div class="circle-icon">
           <img src="spoon-fork-icon.png" alt="아이콘">
@@ -200,6 +210,7 @@
   </script>
 </body>
 </html>
+
 
 
 
