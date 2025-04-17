@@ -81,8 +81,8 @@
     }
 
     .circle-icon img {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       object-fit: contain;
       display: block;
     }
@@ -165,7 +165,7 @@
     ];
 
     function showRecommendation() {
-      const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+      const pick = restaurants[Math.floor(Math.random() *restaurants.length)];
       document.getElementById('foodName').textContent = pick.name;
       document.getElementById('foodType').textContent = pick.type;
       document.getElementById('foodImage').src = pick.img;
@@ -191,7 +191,7 @@
               console.error('공유 실패', error);
             });
           } else {
-            // 공유 불가능할 경우 이미지 다운로드
+            // 공유 불가능할 경우 자동 다운로드
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = '오늘-뭐-먹지.png';
@@ -201,6 +201,9 @@
       });
     }
   </script>
+</body>
+</html>
+
 </body>
 </html>
 
