@@ -12,85 +12,71 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-    }
-
-    .container {
-      background-color: #f4f4f4;
-      border-radius: 24px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      min-height: 100vh;
       text-align: center;
-      overflow: hidden;
-      position: relative;
+    }
+    .container {
+      width: 100%;
+      max-width: 440px;
+      padding: 20px;
+    }
+    .start-screen {
+      background-color: #b3e5fc;
       padding: 40px 20px;
+      border-radius: 20px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
     }
-
-    .title {
-      font-size: 2.4rem;
-      font-weight: 900;
+    .start-screen h1 {
+      font-size: 2.5rem;
       color: #0d47a1;
-      margin: 0;
-      line-height: 1.2;
-      white-space: pre-line;
+      white-space: pre-line; /* 줄바꿈 유지 */
+      margin-bottom: 30px;
     }
-
-    .circle-image {
-      width: 200px;
-      height: 200px;
+    .start-screen .image-placeholder {
+      width: 220px;
+      height: 220px;
       background-color: #81d4fa;
       border-radius: 50%;
-      margin: 30px auto;
+      margin: 0 auto 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
       color: white;
-    }
-
-    .btn {
-      margin-top: 30px;
-      background-color: white;
-      color: #0d47a1;
-      border: none;
-      padding: 16px 24px;
-      border-radius: 12px;
+      font-weight: bold;
       font-size: 1.2rem;
-      font-weight: 700;
+    }
+    .btn {
+      padding: 16px 24px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      background: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: transform 0.2s;
     }
-
     .btn:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
-
-    /* 결과 화면 */
     .card {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #ffffff;
-      border-radius: 24px;
       display: none;
-      flex-direction: column;
-      justify-content: space-between;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
       overflow: hidden;
+      text-align: left;
     }
-
     .card-header {
       display: flex;
       align-items: center;
-      padding: 20px;
+      padding: 16px;
+      gap: 12px;
     }
-
     .circle-icon {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background-color: #29b6f6;
       overflow: hidden;
@@ -98,52 +84,40 @@
       align-items: center;
       justify-content: center;
     }
-
     .circle-icon img {
       width: 24px;
       height: 24px;
       object-fit: contain;
     }
-
     .place-info {
       display: flex;
       flex-direction: column;
-      margin-left: 10px;
     }
-
     .place-info strong {
       font-size: 16px;
-      color: #222;
+      color: #333;
     }
-
     .place-info span {
       font-size: 13px;
-      color: #666;
-      margin-top: 2px;
+      color: #777;
     }
-
     .card-header-right {
       margin-left: auto;
       font-size: 20px;
       color: #aaa;
       cursor: pointer;
     }
-
     .card-img-container {
-      flex: 1;
+      width: 100%;
+      aspect-ratio: 1/1; /* 정사각형 */
       background: #e0f7fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-
     .card-img-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-
     .card-footer {
       display: flex;
       justify-content: space-around;
@@ -151,32 +125,24 @@
       padding: 12px 8px;
       border-top: 1px solid #eee;
     }
-
     .card-footer span {
       color: #2196f3;
       font-weight: bold;
-      cursor: pointer;
       font-size: 14px;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
-
-  <!-- 하나의 container 안에서 start, result 둘 다 관리 -->
   <div class="container">
-    
-    <!-- 시작 화면 -->
-    <div id="start-screen">
-      <h1 class="title">오늘 뭐<br>먹지</h1>
-      <div class="circle-image">
-        이미지 자리
-      </div>
+    <div id="start-screen" class="start-screen">
+      <h1>오늘 뭐<br>먹지?</h1>
+      <div class="image-placeholder">이미지 자리</div>
       <button class="btn" onclick="showRecommendation()">추천받기</button>
     </div>
 
-    <!-- 추천 결과 화면 -->
-    <div class="card" id="result">
+    <div id="result" class="card">
       <div class="card-header">
         <div class="circle-icon">
           <img src="spoon-fork-icon.png" alt="아이콘">
@@ -195,7 +161,6 @@
         <span onclick="shareResult()">📤 공유하기</span>
       </div>
     </div>
-
   </div>
 
   <script>
@@ -224,14 +189,13 @@
       document.getElementById('foodImage').src = pick.img;
 
       document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('result').style.display = 'flex';
+      document.getElementById('result').style.display = 'block';
     }
 
     function shareResult() {
       alert("브라우저에서 지원되지 않는 공유 기능입니다.");
     }
   </script>
-
 </body>
 </html>
 
