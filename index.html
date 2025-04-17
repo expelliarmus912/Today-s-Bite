@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>오늘 뭐 먹지?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -13,20 +13,20 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      text-align: center;
     }
 
     .container {
       background-color: #f4f4f4;
       border-radius: 20px;
-      padding: 24px 20px;
+      padding: 32px 24px;
       width: 100%;
-      max-width: 440px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #0d47a1;
       margin-bottom: 24px;
     }
@@ -34,13 +34,13 @@
     .btn {
       padding: 14px 24px;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       background: #2196f3;
       color: white;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-top: 10px;
       transition: transform 0.2s;
     }
 
@@ -49,37 +49,39 @@
     }
 
     .card {
-      margin-top: 20px;
+      display: none;
       background: #ffffff;
       border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       overflow: hidden;
-      display: none;
       text-align: left;
+      font-size: 14px;
+      padding: 16px;
     }
 
     .card-header {
       display: flex;
       align-items: center;
-      padding: 16px;
-      gap: 12px;
+      margin-bottom: 8px;
     }
 
     .circle-icon {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background-color: #29b6f6;
-      overflow: hidden;
+      background-color: #03a9f4;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      margin-right: 10px;
     }
 
     .circle-icon img {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       object-fit: contain;
+      display: block;
     }
 
     .place-info {
@@ -90,40 +92,29 @@
 
     .place-info strong {
       font-size: 16px;
-      color: #222;
+      color: #333;
+      margin-bottom: 2px;
     }
 
     .place-info span {
       font-size: 13px;
-      color: #666;
-      margin-top: 2px;
+      color: #888;
     }
 
-    .card-header-right {
-      margin-left: auto;
-      font-size: 20px;
-      color: #aaa;
-      cursor: pointer;
-    }
-
-    .card-img-container {
+    .card img {
       width: 100%;
-      height: 280px;
-      background: #e0f7fa; /* 연한 블루, 로딩 중 배경 */
-    }
-
-    .card-img-container img {
-      width: 100%;
-      height: 100%;
+      height: 240px;
       object-fit: cover;
-      display: block;
+      border-radius: 12px;
+      margin-top: 12px;
     }
 
     .card-footer {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 12px 8px;
+      margin-top: 16px;
+      padding-top: 12px;
       border-top: 1px solid #eee;
     }
 
@@ -152,11 +143,8 @@
           <strong id="foodName">음식 이름</strong>
           <span id="foodType">음식 종류</span>
         </div>
-        <div class="card-header-right" onclick="showRecommendation()">⟳</div>
       </div>
-      <div class="card-img-container">
-        <img id="foodImage" src="" alt="추천 이미지">
-      </div>
+      <img id="foodImage" src="" alt="추천 이미지">
       <div class="card-footer">
         <span onclick="showRecommendation()">💡 다음 추천</span>
         <span onclick="shareResult()">📤 공유하기</span>
@@ -166,21 +154,9 @@
 
   <script>
     const restaurants = [
-      {
-        name: "매운 라면",
-        type: "한식",
-        img: "sample-food-1.jpg"
-      },
-      {
-        name: "연어 초밥",
-        type: "일식",
-        img: "sample-food-2.jpg"
-      },
-      {
-        name: "불고기 정식",
-        type: "한식",
-        img: "sample-food-3.jpg"
-      }
+      { name: "연어 초밥", type: "일식", img: "https://via.placeholder.com/400x240?text=연어+초밥" },
+      { name: "불고기 정식", type: "한식", img: "https://via.placeholder.com/400x240?text=불고기+정식" },
+      { name: "마라탕", type: "중식", img: "https://via.placeholder.com/400x240?text=마라탕" }
     ];
 
     function showRecommendation() {
@@ -194,7 +170,7 @@
     }
 
     function shareResult() {
-      alert("브라우저에서 지원되지 않는 공유 기능입니다.");
+      alert("브라우저 공유 기능은 아직 완전히 지원되지 않습니다!");
     }
   </script>
 </body>
