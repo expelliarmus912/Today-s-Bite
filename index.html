@@ -1,78 +1,91 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>오늘 뭐 먹지?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <style>
+    :root {
+      --main-color: #03a9f4;
+      --sub-color: #e1f5fe;
+      --text-color: #212121;
+      --gray-color: #9e9e9e;
+    }
+
     body {
       margin: 0;
-      background-color: #e0f7fa;
+      background: var(--sub-color);
       font-family: 'Pretendard', 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      animation: fadeInBody 0.8s ease;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .container {
-      background-color: #ffffff;
+      background: #fff;
       border-radius: 24px;
-      padding: 40px 24px;
+      padding: 50px 30px;
       width: 100%;
-      max-width: 440px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      max-width: 420px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
       text-align: center;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
       font-size: 2rem;
-      color: #0077c2;
-      margin-bottom: 30px;
       font-weight: 700;
+      color: var(--main-color);
+      margin-bottom: 40px;
     }
 
     .btn {
-      padding: 14px 24px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #29b6f6, #0288d1);
-      color: white;
+      display: inline-block;
+      padding: 16px 28px;
       font-size: 1.1rem;
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      color: #fff;
+      background: linear-gradient(135deg, #4fc3f7, #0288d1);
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      transition: background 0.3s ease;
-      margin-top: 10px;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
-      background: linear-gradient(135deg, #0288d1, #29b6f6);
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #0288d1, #4fc3f7);
     }
 
     .card {
       display: none;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      background: #fff;
+      border-radius: 20px;
       overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      margin-top: 30px;
+      animation: slideFade 0.8s ease;
       text-align: left;
-      margin-top: 20px;
-      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px;
+      padding: 18px 20px;
       border-bottom: 1px solid #eee;
     }
 
@@ -82,49 +95,42 @@
     }
 
     .circle-icon {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
+      background: var(--main-color);
       border-radius: 50%;
-      background-color: #4fc3f7;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 12px;
-      overflow: hidden;
     }
 
     .circle-icon img {
       width: 18px;
       height: 18px;
       object-fit: contain;
-      display: block;
-    }
-
-    .place-info {
-      display: flex;
-      flex-direction: column;
     }
 
     .place-info strong {
-      font-size: 16px;
-      color: #333;
+      font-size: 1rem;
+      color: var(--text-color);
       font-weight: 600;
     }
 
     .place-info span {
-      font-size: 13px;
-      color: #777;
+      font-size: 0.85rem;
+      color: var(--gray-color);
     }
 
     .card-header-right {
       font-size: 20px;
-      color: #999;
+      color: var(--gray-color);
       cursor: pointer;
     }
 
     .card img {
       width: 100%;
-      height: 300px;
+      height: 280px;
       object-fit: cover;
     }
 
@@ -132,91 +138,98 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 14px 8px;
+      padding: 16px 10px;
       border-top: 1px solid #eee;
     }
 
     .card-footer span {
-      color: #0288d1;
-      font-weight: bold;
+      color: var(--main-color);
+      font-weight: 600;
       font-size: 0.95rem;
       cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .card-footer span:hover {
+      color: #0288d1;
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <div id="start-screen">
-      <h1>오늘 뭐 먹지?</h1>
-      <button class="btn" onclick="showRecommendation()">추천받기</button>
-    </div>
 
-    <div class="card" id="result">
-      <div class="card-header">
-        <div class="card-header-left">
-          <div class="circle-icon">
-            <img src="spoon-fork-icon.png" alt="숟가락포크아이콘">
-          </div>
-          <div class="place-info">
-            <strong id="foodName">음식 이름</strong>
-            <span id="foodType">음식 종류</span>
-          </div>
-        </div>
-        <div class="card-header-right" onclick="showRecommendation()">⟳</div>
-      </div>
-      <img id="foodImage" src="" alt="추천 이미지">
-      <div class="card-footer">
-        <span onclick="showRecommendation()">💡 다음 추천</span>
-        <span onclick="shareResult()">📤 공유하기</span>
-      </div>
-    </div>
+<div class="container">
+  <div id="start-screen">
+    <h1>오늘 뭐 먹지?</h1>
+    <button class="btn" onclick="showRecommendation()">추천받기</button>
   </div>
 
-  <script>
-    const restaurants = [
-      { name: "매운 라면", type: "한식", img: "sample-food-1.jpg" },
-      { name: "연어 초밥", type: "일식", img: "sample-food-2.jpg" },
-      { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
-    ];
+  <div class="card" id="result">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="circle-icon">
+          <img src="spoon-fork-icon.png" alt="숟가락포크아이콘">
+        </div>
+        <div class="place-info">
+          <strong id="foodName">음식 이름</strong>
+          <span id="foodType">음식 종류</span>
+        </div>
+      </div>
+      <div class="card-header-right" onclick="showRecommendation()">⟳</div>
+    </div>
+    <img id="foodImage" src="" alt="추천 이미지">
+    <div class="card-footer">
+      <span onclick="showRecommendation()">💡 다음 추천</span>
+      <span onclick="shareResult()">📤 공유하기</span>
+    </div>
+  </div>
+</div>
 
-    function showRecommendation() {
-      const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
-      document.getElementById('foodName').textContent = pick.name;
-      document.getElementById('foodType').textContent = pick.type;
-      document.getElementById('foodImage').src = pick.img;
+<script>
+const restaurants = [
+  { name: "매운 라면", type: "한식", img: "sample-food-1.jpg" },
+  { name: "연어 초밥", type: "일식", img: "sample-food-2.jpg" },
+  { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
+];
 
-      document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('result').style.display = 'block';
-    }
+function showRecommendation() {
+  const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+  document.getElementById('foodName').textContent = pick.name;
+  document.getElementById('foodType').textContent = pick.type;
+  document.getElementById('foodImage').src = pick.img;
 
-    function shareResult() {
-      const card = document.getElementById('result');
-      html2canvas(card, { scale: 2 }).then(canvas => {
-        canvas.toBlob(blob => {
-          const file = new File([blob], '오늘-뭐-먹지.png', { type: 'image/png' });
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+}
 
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({
-              title: '오늘 뭐 먹지?',
-              text: '오늘은 여기 어때요?',
-              files: [file]
-            }).then(() => {
-              console.log('공유 성공');
-            }).catch(error => {
-              console.error('공유 실패', error);
-            });
-          } else {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = '오늘-뭐-먹지.png';
-            link.click();
-          }
+function shareResult() {
+  const card = document.getElementById('result');
+  html2canvas(card, { scale: 2 }).then(canvas => {
+    canvas.toBlob(blob => {
+      const file = new File([blob], '오늘-뭐-먹지.png', { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          title: '오늘 뭐 먹지?',
+          text: '오늘의 추천!',
+          files: [file]
+        }).then(() => {
+          console.log('공유 완료!');
+        }).catch(error => {
+          console.error('공유 실패', error);
         });
-      });
-    }
-  </script>
+      } else {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = '오늘-뭐-먹지.png';
+        link.click();
+      }
+    });
+  });
+}
+</script>
+
 </body>
 </html>
+
 
 
