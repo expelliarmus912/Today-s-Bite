@@ -17,12 +17,14 @@
 
     .container {
       background-color: #f4f4f4;
-      padding: 40px 20px;
       border-radius: 24px;
       width: 90%;
       max-width: 400px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
       text-align: center;
+      overflow: hidden;
+      position: relative;
+      padding: 40px 20px;
     }
 
     .title {
@@ -35,8 +37,8 @@
     }
 
     .circle-image {
-      width: 220px;
-      height: 220px;
+      width: 200px;
+      height: 200px;
       background-color: #81d4fa;
       border-radius: 50%;
       margin: 30px auto;
@@ -65,22 +67,25 @@
       transform: scale(0.97);
     }
 
-    /* 추천 결과 화면 스타일 */
+    /* 결과 화면 */
     .card {
-      background-color: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 24px;
       display: none;
-      text-align: left;
-      width: 90%;
-      max-width: 400px;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
     }
 
     .card-header {
       display: flex;
       align-items: center;
-      padding: 16px;
+      padding: 20px;
     }
 
     .circle-icon {
@@ -125,9 +130,11 @@
     }
 
     .card-img-container {
-      width: 100%;
-      height: 280px;
+      flex: 1;
       background: #e0f7fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card-img-container img {
@@ -156,36 +163,39 @@
 
 <body>
 
-  <!-- 시작화면 -->
-  <div class="container" id="start-screen">
-    <h1 class="title">오늘 뭐<br>먹지</h1>
-
-    <div class="circle-image">
-      이미지 자리
-    </div>
-
-    <button class="btn" onclick="showRecommendation()">추천받기</button>
-  </div>
-
-  <!-- 추천 결과 화면 -->
-  <div class="card" id="result">
-    <div class="card-header">
-      <div class="circle-icon">
-        <img src="spoon-fork-icon.png" alt="아이콘">
+  <!-- 하나의 container 안에서 start, result 둘 다 관리 -->
+  <div class="container">
+    
+    <!-- 시작 화면 -->
+    <div id="start-screen">
+      <h1 class="title">오늘 뭐<br>먹지</h1>
+      <div class="circle-image">
+        이미지 자리
       </div>
-      <div class="place-info">
-        <strong id="foodName">음식 이름</strong>
-        <span id="foodType">음식 종류</span>
+      <button class="btn" onclick="showRecommendation()">추천받기</button>
+    </div>
+
+    <!-- 추천 결과 화면 -->
+    <div class="card" id="result">
+      <div class="card-header">
+        <div class="circle-icon">
+          <img src="spoon-fork-icon.png" alt="아이콘">
+        </div>
+        <div class="place-info">
+          <strong id="foodName">음식 이름</strong>
+          <span id="foodType">음식 종류</span>
+        </div>
+        <div class="card-header-right" onclick="showRecommendation()">⟳</div>
       </div>
-      <div class="card-header-right" onclick="showRecommendation()">⟳</div>
+      <div class="card-img-container">
+        <img id="foodImage" src="" alt="추천 이미지">
+      </div>
+      <div class="card-footer">
+        <span onclick="showRecommendation()">💡 다음 추천</span>
+        <span onclick="shareResult()">📤 공유하기</span>
+      </div>
     </div>
-    <div class="card-img-container">
-      <img id="foodImage" src="" alt="추천 이미지">
-    </div>
-    <div class="card-footer">
-      <span onclick="showRecommendation()">💡 다음 추천</span>
-      <span onclick="shareResult()">📤 공유하기</span>
-    </div>
+
   </div>
 
   <script>
@@ -214,7 +224,7 @@
       document.getElementById('foodImage').src = pick.img;
 
       document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').style.display = 'flex';
     }
 
     function shareResult() {
