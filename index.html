@@ -106,11 +106,17 @@
       cursor: pointer;
     }
 
-    .card img {
+    .card-img-container {
       width: 100%;
       height: 280px;
+      background: #e0f7fa; /* 연한 블루, 로딩 중 배경 */
+    }
+
+    .card-img-container img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      background: #f0f0f0;
+      display: block;
     }
 
     .card-footer {
@@ -148,7 +154,9 @@
         </div>
         <div class="card-header-right" onclick="showRecommendation()">⟳</div>
       </div>
-      <img id="foodImage" src="" alt="추천 이미지">
+      <div class="card-img-container">
+        <img id="foodImage" src="" alt="추천 이미지">
+      </div>
       <div class="card-footer">
         <span onclick="showRecommendation()">💡 다음 추천</span>
         <span onclick="shareResult()">📤 공유하기</span>
