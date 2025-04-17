@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -158,21 +159,9 @@
 
   <script>
     const restaurants = [
-      {
-        name: "매운 라면",
-        type: "한식",
-        img: "sample-food-1.jpg"
-      },
-      {
-        name: "연어 초밥",
-        type: "일식",
-        img: "sample-food-2.jpg"
-      },
-      {
-        name: "불고기 정식",
-        type: "한식",
-        img: "sample-food-3.jpg"
-      }
+      { name: "매운 라면", type: "한식", img: "sample-food-1.jpg" },
+      { name: "연어 초밥", type: "일식", img: "sample-food-2.jpg" },
+      { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
     ];
 
     function showRecommendation() {
@@ -186,8 +175,32 @@
     }
 
     function shareResult() {
-      alert("브라우저에서 지원되지 않는 공유 기능입니다.");
+      const card = document.getElementById('result');
+      html2canvas(card, { scale: 2 }).then(canvas => {
+        canvas.toBlob(blob => {
+          const file = new File([blob], '오늘-뭐-먹지.png', { type: 'image/png' });
+
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+              title: '오늘 뭐 먹지?',
+              text: '오늘은 여기 어때요?',
+              files: [file]
+            }).then(() => {
+              console.log('공유 성공');
+            }).catch(error => {
+              console.error('공유 실패', error);
+            });
+          } else {
+            // 공유 불가능할 경우 이미지 다운로드
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '오늘-뭐-먹지.png';
+            link.click();
+          }
+        });
+      });
     }
   </script>
 </body>
 </html>
+
