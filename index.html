@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오늘 뭐 먹지?</title>
   <style>
     body {
       margin: 0;
@@ -12,71 +12,90 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      height: 100vh;
+    }
+
+    .container {
+      background: #f4f4f4;
+      border-radius: 20px;
+      padding: 40px 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
-    .container {
-      width: 100%;
-      max-width: 440px;
-      padding: 20px;
+
+    .start-screen, .result-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
     }
-    .start-screen {
-      background-color: #b3e5fc;
-      padding: 40px 20px;
-      border-radius: 20px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+
+    .start-screen.active, .result-screen.active {
+      display: flex;
     }
-    .start-screen h1 {
-      font-size: 2.5rem;
+
+    .title {
+      font-size: 2.2rem;
       color: #0d47a1;
-      white-space: pre-line; /* 줄바꿈 유지 */
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      line-height: 1.3;
     }
-    .start-screen .image-placeholder {
-      width: 220px;
-      height: 220px;
+
+    .start-image {
+      width: 160px;
+      height: 160px;
       background-color: #81d4fa;
       border-radius: 50%;
-      margin: 0 auto 30px;
+      overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 1.2rem;
+      align-items: center;
+      margin-bottom: 30px;
     }
+
+    .start-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .btn {
-      padding: 16px 24px;
-      font-size: 1.1rem;
-      font-weight: bold;
       background: #2196f3;
       color: white;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      font-weight: bold;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: transform 0.2s;
     }
+
     .btn:active {
-      transform: scale(0.96);
+      transform: scale(0.98);
     }
+
     .card {
-      display: none;
       background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
       overflow: hidden;
       text-align: left;
+      width: 100%;
     }
+
     .card-header {
       display: flex;
       align-items: center;
       padding: 16px;
       gap: 12px;
     }
+
     .circle-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background-color: #29b6f6;
       overflow: hidden;
@@ -84,40 +103,50 @@
       align-items: center;
       justify-content: center;
     }
+
     .circle-icon img {
       width: 24px;
       height: 24px;
       object-fit: contain;
     }
+
     .place-info {
       display: flex;
       flex-direction: column;
+      justify-content: center;
     }
+
     .place-info strong {
       font-size: 16px;
-      color: #333;
+      color: #222;
     }
+
     .place-info span {
       font-size: 13px;
-      color: #777;
+      color: #666;
+      margin-top: 2px;
     }
+
     .card-header-right {
       margin-left: auto;
       font-size: 20px;
       color: #aaa;
       cursor: pointer;
     }
+
     .card-img-container {
       width: 100%;
-      aspect-ratio: 1/1; /* 정사각형 */
+      height: 280px;
       background: #e0f7fa;
     }
+
     .card-img-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
+
     .card-footer {
       display: flex;
       justify-content: space-around;
@@ -125,24 +154,29 @@
       padding: 12px 8px;
       border-top: 1px solid #eee;
     }
+
     .card-footer span {
       color: #2196f3;
       font-weight: bold;
-      font-size: 14px;
       cursor: pointer;
+      font-size: 14px;
     }
+
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <div id="start-screen" class="start-screen">
-      <h1>오늘 뭐<br>먹지?</h1>
-      <div class="image-placeholder">이미지 자리</div>
-      <button class="btn" onclick="showRecommendation()">추천받기</button>
+<div class="container">
+  <div id="start-screen" class="start-screen active">
+    <div class="title">오늘 뭐<br>먹지?</div>
+    <div class="start-image">
+      <img src="your-image.png" alt="시작화면 이미지">
     </div>
+    <button class="btn" onclick="showRecommendation()">추천받기</button>
+  </div>
 
-    <div id="result" class="card">
+  <div id="result-screen" class="result-screen">
+    <div class="card">
       <div class="card-header">
         <div class="circle-icon">
           <img src="spoon-fork-icon.png" alt="아이콘">
@@ -162,42 +196,33 @@
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-    const restaurants = [
-      {
-        name: "매운 라면",
-        type: "한식",
-        img: "sample-food-1.jpg"
-      },
-      {
-        name: "연어 초밥",
-        type: "일식",
-        img: "sample-food-2.jpg"
-      },
-      {
-        name: "불고기 정식",
-        type: "한식",
-        img: "sample-food-3.jpg"
-      }
-    ];
+<script>
+const restaurants = [
+  { name: "매운 라면", type: "한식", img: "sample-food-1.jpg" },
+  { name: "연어 초밥", type: "일식", img: "sample-food-2.jpg" },
+  { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
+];
 
-    function showRecommendation() {
-      const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
-      document.getElementById('foodName').textContent = pick.name;
-      document.getElementById('foodType').textContent = pick.type;
-      document.getElementById('foodImage').src = pick.img;
+function showRecommendation() {
+  const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+  document.getElementById('foodName').textContent = pick.name;
+  document.getElementById('foodType').textContent = pick.type;
+  document.getElementById('foodImage').src = pick.img;
 
-      document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('result').style.display = 'block';
-    }
+  document.getElementById('start-screen').classList.remove('active');
+  document.getElementById('result-screen').classList.add('active');
+}
 
-    function shareResult() {
-      alert("브라우저에서 지원되지 않는 공유 기능입니다.");
-    }
-  </script>
+function shareResult() {
+  alert("브라우저에서 지원되지 않는 공유 기능입니다.");
+}
+</script>
+
 </body>
 </html>
+
 
 
 
