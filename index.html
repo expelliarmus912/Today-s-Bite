@@ -42,7 +42,7 @@
     h1 {
       font-size: 2rem;
       font-weight: 700;
-      color: var(--main-color);
+      color: var(--text-color); /* 단색으로 변경 */
       margin-bottom: 40px;
     }
 
@@ -51,18 +51,17 @@
       padding: 16px 28px;
       font-size: 1.1rem;
       font-weight: bold;
-      color: #fff;
-      background: linear-gradient(135deg, #4fc3f7, #0288d1);
+      color: #ffffff;
+      background: var(--main-color);
       border: none;
       border-radius: 14px;
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      background: linear-gradient(135deg, #0288d1, #4fc3f7);
+      transform: translateY(-3px); /* hover 시 살짝 위로 올라감 */
     }
 
     .card {
@@ -155,6 +154,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -230,6 +230,4 @@ function shareResult() {
 
 </body>
 </html>
-
-
 
