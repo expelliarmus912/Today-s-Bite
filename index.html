@@ -4,18 +4,14 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- 굵은 한글 전용 서체 -->
+  <!-- 굵은 한글 서체 -->
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap"
     rel="stylesheet"
   />
   <style>
-    /* ── reset & box-sizing ── */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ── 전체 배경 & 중앙 정렬 ── */
     body {
       height: 100vh;
       background-color: #b3e5fc;
@@ -28,24 +24,24 @@
       padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
 
-    /* ── 시작 화면 컨테이너 ── */
+    /* 시작 화면 전체 정렬 */
     #startScreen {
       display: flex;
       flex-direction: column;
-      align-items: center;  /* <-- 여기서 가로 중앙 정렬 */
+      align-items: center;
       width: 100%;
     }
 
-    /* ── 타이틀 ── */
+    /* 제목을 더 크게 */
     .title {
-      font-size: 3rem;
+      font-size: 3.5rem;    /* 시안 크기와 비슷하게 키움 */
       line-height: 1.1;
       color: #0D3F67;
       font-weight: 900;
       margin-bottom: 50px;
     }
 
-    /* ── 원형 이미지 ── */
+    /* 원형 이미지 */
     .circle {
       width: 260px;
       height: 260px;
@@ -63,13 +59,13 @@
       object-fit: cover;
     }
 
-    /* ── 버튼 컨테이너 ── */
+    /* 버튼 컨테이너: 너비 줄이고, 둥글기 덜게 */
     .btn-container {
       background-color: #ffffff;
-      border-radius: 30px;
-      padding: 20px 0;
-      width: 90%;
-      max-width: 360px;
+      border-radius: 16px;      /* 둥글기 덜함 */
+      padding: 18px 0;
+      width: 80%;               /* 화면 대비 80% */
+      max-width: 300px;         /* 최대 300px */
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 40px;
     }
@@ -86,7 +82,7 @@
       transition: transform 0.1s;
     }
 
-    /* ── 추천 결과 카드 ── */
+    /* 결과 카드 (기존과 동일) */
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -138,7 +134,7 @@
       aspect-ratio: 1/1;
     }
     .card-img-container img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+      width: 100%; height: 100%; object-fit: cover;
     }
     .card-footer {
       display: flex;
@@ -215,7 +211,6 @@
 
 </body>
 </html>
-
 
 
 
