@@ -4,45 +4,58 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 굵은 한글 전용 서체 -->
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap"
     rel="stylesheet"
   />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ── reset & box-sizing ── */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
 
+    /* ── 전체 배경 & 중앙 정렬 ── */
     body {
       height: 100vh;
       background-color: #b3e5fc;
       font-family: 'Noto Sans KR', sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 100px 0;        /* 위아래 여유 더 늘림 */
+      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
 
-    /* ── 제목 ── */
+    /* ── 시작 화면 컨테이너 ── */
+    #startScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;  /* <-- 여기서 가로 중앙 정렬 */
+      width: 100%;
+    }
+
+    /* ── 타이틀 ── */
     .title {
-      font-size: 2.6rem;
-      line-height: 1.2;
+      font-size: 3rem;
+      line-height: 1.1;
       color: #0D3F67;
-      font-weight: 900;         /* 아주 두껍게 */
-      margin-bottom: 40px;      /* 원과의 간격 키움 */
+      font-weight: 900;
+      margin-bottom: 50px;
     }
 
     /* ── 원형 이미지 ── */
     .circle {
-      width: 180px;
-      height: 180px;
+      width: 260px;
+      height: 260px;
       background-color: #81d4fa;
       border-radius: 50%;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
     }
     .circle img {
       width: 100%;
@@ -53,26 +66,27 @@
     /* ── 버튼 컨테이너 ── */
     .btn-container {
       background-color: #ffffff;
-      border-radius: 16px;      /* 작게 깎인 사각형 */
-      padding: 12px 0;
-      width: 220px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+      border-radius: 30px;
+      padding: 20px 0;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      margin-bottom: 40px;
     }
-
     .btn {
       background: transparent;
       border: none;
       color: #0D3F67;
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       font-weight: 900;
       cursor: pointer;
     }
     .btn:active {
-      transform: scale(0.96);
+      transform: scale(0.95);
+      transition: transform 0.1s;
     }
 
-    /* ── 결과 카드 ── (이하 기존과 동일) ── */
+    /* ── 추천 결과 카드 ── */
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -142,8 +156,10 @@
     }
   </style>
 </head>
+
 <body>
 
+  <!-- 시작 화면 -->
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
     <div class="circle">
@@ -154,6 +170,7 @@
     </div>
   </div>
 
+  <!-- 결과 화면 -->
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
@@ -190,6 +207,7 @@
       document.getElementById('startScreen').style.display = 'none';
       document.getElementById('resultScreen').style.display = 'flex';
     }
+
     function shareResult() {
       alert("공유 기능은 현재 브라우저에서 지원되지 않을 수 있습니다.");
     }
