@@ -5,80 +5,75 @@
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    /* ── 전체 배경 & 중앙 정렬 ── */
     body {
       margin: 0;
+      height: 100vh;
       background-color: #b3e5fc;
       font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
 
-    .container {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 40px 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      width: 90%;
-      max-width: 400px;
-    }
-
+    /* ── 타이틀 ── */
     .title {
-      font-size: 2rem;
+      font-size: 2.5rem;
+      line-height: 1.2;
       color: #1565c0;
-      margin-bottom: 20px;
-      white-space: pre-line;
       font-weight: bold;
+      margin-bottom: 24px;
+      white-space: pre-line;
     }
 
+    /* ── 원형 이미지 ── */
     .circle {
-      margin: 20px auto;
       width: 200px;
       height: 200px;
       background-color: #81d4fa;
       border-radius: 50%;
       overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      margin-bottom: 32px;
     }
-
     .circle img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
+    /* ── 추천받기 버튼 ── */
     .btn {
-      margin-top: 20px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 12px;
-      background-color: #2196f3;
-      color: white;
-      font-size: 1rem;
+      padding: 14px 60px;
+      background-color: #ffffff;
+      color: #1565c0;
+      font-size: 1.2rem;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.1s;
     }
-
     .btn:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
 
-    /* 추천 결과 카드 */
+    /* ── 추천 결과 카드 ── */
     .card {
+      display: none;
+      flex-direction: column;
       background: #ffffff;
       border-radius: 20px;
       box-shadow: 0 6px 24px rgba(0,0,0,0.2);
       overflow: hidden;
-      display: none;
       width: 90%;
       max-width: 400px;
-      flex-direction: column;
+      margin-top: 20px;
     }
 
     .card-header {
@@ -87,7 +82,6 @@
       padding: 16px;
       border-bottom: 1px solid #eee;
     }
-
     .circle-icon {
       width: 36px;
       height: 36px;
@@ -99,35 +93,36 @@
       justify-content: center;
       margin-right: 10px;
     }
-
     .circle-icon img {
       width: 24px;
       height: 24px;
       object-fit: contain;
     }
-
     .place-info {
       display: flex;
       flex-direction: column;
     }
-
     .place-info strong {
       font-size: 16px;
       color: #222;
     }
-
     .place-info span {
       font-size: 13px;
       color: #666;
       margin-top: 2px;
     }
+    .card-header-right {
+      margin-left: auto;
+      font-size: 1.2rem;
+      color: #999;
+      cursor: pointer;
+    }
 
     .card-img-container {
       width: 100%;
       background-color: #e0f7fa;
-      aspect-ratio: 1/1;
+      aspect-ratio: 1 / 1;
     }
-
     .card-img-container img {
       width: 100%;
       height: 100%;
@@ -142,7 +137,6 @@
       padding: 12px 8px;
       border-top: 1px solid #eee;
     }
-
     .card-footer span {
       color: #2196f3;
       font-weight: bold;
@@ -154,7 +148,8 @@
 
 <body>
 
-  <div id="startScreen" class="container">
+  <!-- 시작 화면 -->
+  <div id="startScreen">
     <div class="title">오늘 뭐{'\n'}먹지?</div>
     <div class="circle">
       <img src="boy-icon1.png" alt="아이 이미지" />
@@ -162,6 +157,7 @@
     <button class="btn" onclick="showRecommendation()">추천받기</button>
   </div>
 
+  <!-- 결과 화면 -->
   <div id="resultScreen" class="card">
     <div class="card-header">
       <div class="circle-icon">
@@ -174,7 +170,7 @@
       <div class="card-header-right" onclick="showRecommendation()">⟳</div>
     </div>
     <div class="card-img-container">
-      <img id="foodImage" src="" alt="추천 음식 이미지">
+      <img id="foodImage" src="" alt="추천 음식 이미지" />
     </div>
     <div class="card-footer">
       <span onclick="showRecommendation()">💡 다음 추천</span>
@@ -184,21 +180,9 @@
 
   <script>
     const restaurants = [
-      {
-        name: "매운 라면",
-        type: "한식",
-        img: "sample-food-1.jpg"
-      },
-      {
-        name: "연어 초밥",
-        type: "일식",
-        img: "sample-food-2.jpg"
-      },
-      {
-        name: "불고기 정식",
-        type: "한식",
-        img: "sample-food-3.jpg"
-      }
+      { name: "매운 라면",   type: "한식", img: "sample-food-1.jpg" },
+      { name: "연어 초밥",   type: "일식", img: "sample-food-2.jpg" },
+      { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
     ];
 
     function showRecommendation() {
@@ -218,6 +202,8 @@
 
 </body>
 </html>
+
+
 
 
 
