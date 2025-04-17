@@ -4,41 +4,46 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 한글 전용 서체 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
   <style>
-    /* ── 전체 배경 & 중앙 정렬 ── */
-    body {
+    /* reset & box-sizing */
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       height: 100vh;
-      background-color: #b3e5fc;
-      font-family: 'Segoe UI', sans-serif;
+      background-color: #b3e5fc;               /* 연하늘 배경 */
+      font-family: 'Noto Sans KR', sans-serif; /* 한글 전용 글꼴 */
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;          /* 위-중앙-아래 간격 배분 */
       align-items: center;
       text-align: center;
+      padding: 60px 0;                          /* 상하 여유 */
     }
 
-    /* ── 타이틀 ── */
+    /* 타이틀 */
     .title {
-      font-size: 2.5rem;
+      font-size: 2.4rem;     /* 시안 비율에 맞춰 키움 */
       line-height: 1.2;
-      color: #1565c0;
-      font-weight: bold;
-      margin-bottom: 24px;
-      white-space: pre-line;
+      color: #0D3F67;        /* 진한 네이비 */
+      font-weight: 700;
     }
 
-    /* ── 원형 이미지 ── */
+    /* 원형 아이콘 */
     .circle {
-      width: 200px;
-      height: 200px;
-      background-color: #81d4fa;
+      width: 240px;
+      height: 240px;
+      background-color: #81d4fa; /* 원 배경 */
       border-radius: 50%;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 32px;
     }
     .circle img {
       width: 100%;
@@ -46,13 +51,15 @@
       object-fit: cover;
     }
 
-    /* ── 추천받기 버튼 ── */
+    /* 추천받기 버튼 */
     .btn {
-      padding: 14px 60px;
+      width: 80%;
+      max-width: 300px;
+      padding: 16px 0;
       background-color: #ffffff;
-      color: #1565c0;
+      color: #0D3F67;
       font-size: 1.2rem;
-      font-weight: bold;
+      font-weight: 700;
       border: none;
       border-radius: 30px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -64,21 +71,22 @@
     }
 
     /* ── 추천 결과 카드 ── */
-    .card {
+    #resultScreen {
       display: none;
       flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 400px;
       background: #ffffff;
       border-radius: 20px;
       box-shadow: 0 6px 24px rgba(0,0,0,0.2);
       overflow: hidden;
-      width: 90%;
-      max-width: 400px;
-      margin-top: 20px;
+      margin-bottom: 40px; /* 하단 여유 */
     }
-
     .card-header {
       display: flex;
       align-items: center;
+      width: 100%;
       padding: 16px;
       border-bottom: 1px solid #eee;
     }
@@ -87,10 +95,9 @@
       height: 36px;
       border-radius: 50%;
       background-color: #29b6f6;
-      overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       margin-right: 10px;
     }
     .circle-icon img {
@@ -113,15 +120,14 @@
     }
     .card-header-right {
       margin-left: auto;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #999;
       cursor: pointer;
     }
-
     .card-img-container {
       width: 100%;
       background-color: #e0f7fa;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1/1;
     }
     .card-img-container img {
       width: 100%;
@@ -129,17 +135,17 @@
       object-fit: cover;
       display: block;
     }
-
     .card-footer {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 12px 8px;
+      padding: 12px 0;
       border-top: 1px solid #eee;
+      width: 100%;
     }
     .card-footer span {
       color: #2196f3;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
       font-size: 14px;
     }
@@ -150,7 +156,7 @@
 
   <!-- 시작 화면 -->
   <div id="startScreen">
-    <div class="title">오늘 뭐{'\n'}먹지?</div>
+    <div class="title">오늘 뭐<br>먹지?</div>
     <div class="circle">
       <img src="boy-icon1.png" alt="아이 이미지" />
     </div>
@@ -158,10 +164,10 @@
   </div>
 
   <!-- 결과 화면 -->
-  <div id="resultScreen" class="card">
+  <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
-        <img src="spoon-fork-icon.png" alt="숟가락 포크 아이콘" />
+        <img src="spoon-fork-icon.png" alt="숟가락·포크 아이콘" />
       </div>
       <div class="place-info">
         <strong id="foodName">음식 이름</strong>
