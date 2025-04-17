@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
-      background-color: #b3e5fc;
+      background-color: #b3e5fc; /* 배경 하늘색 */
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
@@ -17,12 +17,13 @@
     }
 
     .container {
-      background-color: #f4f4f4;
-      border-radius: 20px;
-      padding: 24px 20px;
+      /* ★ 배경, 그림자, 패딩 제거 */
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
       width: 100%;
       max-width: 440px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
     }
 
     h1 {
@@ -45,17 +46,17 @@
     }
 
     .btn:active {
-      transform: scale(0.96);
+      transform: scale(0.97);
     }
 
     .card {
       margin-top: 20px;
-      background: #ffffff;
+      background: #ffffff; /* 카드만 흰색 */
       border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
       overflow: hidden;
-      display: none;
       text-align: left;
+      display: none;
     }
 
     .card-header {
@@ -63,7 +64,6 @@
       align-items: center;
       padding: 16px;
       gap: 12px;
-      background-color: #ffffff; /* 상단 배경도 흰색 */
     }
 
     .circle-icon {
@@ -78,8 +78,8 @@
     }
 
     .circle-icon img {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       object-fit: contain;
     }
 
@@ -110,7 +110,7 @@
     .card-img-container {
       width: 100%;
       height: 280px;
-      background: #ffffff; /* 사진 영역도 흰색 */
+      background: #e0f7fa;
     }
 
     .card-img-container img {
@@ -126,7 +126,6 @@
       align-items: center;
       padding: 12px 8px;
       border-top: 1px solid #eee;
-      background: #ffffff; /* 푸터도 흰색 */
     }
 
     .card-footer span {
@@ -148,7 +147,7 @@
     <div class="card" id="result">
       <div class="card-header">
         <div class="circle-icon">
-          <img src="spoon-fork-icon.png" alt="숟가락포크아이콘">
+          <img src="spoon-fork-icon.png" alt="아이콘">
         </div>
         <div class="place-info">
           <strong id="foodName">음식 이름</strong>
@@ -156,11 +155,9 @@
         </div>
         <div class="card-header-right" onclick="showRecommendation()">⟳</div>
       </div>
-
       <div class="card-img-container">
         <img id="foodImage" src="" alt="추천 이미지">
       </div>
-
       <div class="card-footer">
         <span onclick="showRecommendation()">💡 다음 추천</span>
         <span onclick="shareResult()">📤 공유하기</span>
@@ -170,9 +167,21 @@
 
   <script>
     const restaurants = [
-      { name: "매운 라면", type: "한식", img: "sample-food-1.jpg" },
-      { name: "연어 초밥", type: "일식", img: "sample-food-2.jpg" },
-      { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
+      {
+        name: "매운 라면",
+        type: "한식",
+        img: "sample-food-1.jpg"
+      },
+      {
+        name: "연어 초밥",
+        type: "일식",
+        img: "sample-food-2.jpg"
+      },
+      {
+        name: "불고기 정식",
+        type: "한식",
+        img: "sample-food-3.jpg"
+      }
     ];
 
     function showRecommendation() {
@@ -186,12 +195,11 @@
     }
 
     function shareResult() {
-      alert("이 브라우저는 공유 기능을 지원하지 않습니다.");
+      alert("브라우저에서 지원되지 않는 공유 기능입니다.");
     }
   </script>
 </body>
 </html>
 
-</html>
 
 
