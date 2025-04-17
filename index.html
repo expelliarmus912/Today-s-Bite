@@ -1,55 +1,65 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>오늘 뭐 먹지?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       background-color: #b3e5fc;
       font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      text-align: center;
+      flex-direction: column;
     }
 
-    .container {
-      background: none;
-      padding: 0;
-      border-radius: 0;
-      box-shadow: none;
+    #start-screen, #recommendation {
       width: 100%;
       max-width: 440px;
+      text-align: center;
     }
 
-    .card {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-      overflow: hidden;
-      padding: 30px 20px;
-      text-align: center;
+    /* 시작 화면 */
+    #start-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #0d47a1;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .circle-placeholder {
+      width: 200px;
+      height: 200px;
+      background-color: #81d4fa;
+      border-radius: 50%;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #ffffff;
+      font-weight: bold;
     }
 
     .btn {
-      padding: 14px 24px;
+      padding: 16px 32px;
+      background-color: #ffffff;
+      color: #0d47a1;
+      font-weight: bold;
       border: none;
       border-radius: 12px;
-      background: #2196f3;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: transform 0.2s;
     }
 
@@ -57,21 +67,21 @@
       transform: scale(0.97);
     }
 
-    .recommend-card {
-      margin-top: 20px;
+    /* 추천 화면 */
+    #recommendation {
       background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      border-radius: 20px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
       overflow: hidden;
-      text-align: left;
       display: none;
+      flex-direction: column;
     }
 
     .card-header {
       display: flex;
       align-items: center;
       padding: 16px;
-      gap: 12px;
+      background: #ffffff;
     }
 
     .circle-icon {
@@ -83,18 +93,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-right: 10px;
     }
 
     .circle-icon img {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       object-fit: contain;
     }
 
     .place-info {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      text-align: left;
     }
 
     .place-info strong {
@@ -125,7 +136,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
     .card-footer {
@@ -134,6 +144,7 @@
       align-items: center;
       padding: 12px 8px;
       border-top: 1px solid #eee;
+      background: #ffffff;
     }
 
     .card-footer span {
@@ -142,56 +153,46 @@
       cursor: pointer;
       font-size: 14px;
     }
+
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <!-- 시작 카드 -->
-    <div class="card" id="start-screen">
-      <h1>오늘 뭐 먹지?</h1>
-      <button class="btn" onclick="showRecommendation()">추천받기</button>
+  <!-- 시작화면 -->
+  <div id="start-screen">
+    <h1>오늘 뭐 먹지?</h1>
+    <div class="circle-placeholder">
+      이미지 자리
     </div>
+    <button class="btn" onclick="showRecommendation()">추천받기</button>
+  </div>
 
-    <!-- 추천 결과 카드 -->
-    <div class="recommend-card" id="result">
-      <div class="card-header">
-        <div class="circle-icon">
-          <img src="spoon-fork-icon.png" alt="아이콘">
-        </div>
-        <div class="place-info">
-          <strong id="foodName">음식 이름</strong>
-          <span id="foodType">음식 종류</span>
-        </div>
-        <div class="card-header-right" onclick="showRecommendation()">⟳</div>
+  <!-- 추천결과 화면 -->
+  <div id="recommendation">
+    <div class="card-header">
+      <div class="circle-icon">
+        <img src="spoon-fork-icon.png" alt="아이콘">
       </div>
-      <div class="card-img-container">
-        <img id="foodImage" src="" alt="추천 이미지">
+      <div class="place-info">
+        <strong id="foodName">음식 이름</strong>
+        <span id="foodType">음식 종류</span>
       </div>
-      <div class="card-footer">
-        <span onclick="showRecommendation()">💡 다음 추천</span>
-        <span onclick="shareResult()">📤 공유하기</span>
-      </div>
+      <div class="card-header-right" onclick="showRecommendation()">⟳</div>
+    </div>
+    <div class="card-img-container">
+      <img id="foodImage" src="" alt="추천 이미지">
+    </div>
+    <div class="card-footer">
+      <span onclick="showRecommendation()">💡 다음 추천</span>
+      <span onclick="shareResult()">📤 공유하기</span>
     </div>
   </div>
 
   <script>
     const restaurants = [
-      {
-        name: "매운 라면",
-        type: "한식",
-        img: "sample-food-1.jpg"
-      },
-      {
-        name: "연어 초밥",
-        type: "일식",
-        img: "sample-food-2.jpg"
-      },
-      {
-        name: "불고기 정식",
-        type: "한식",
-        img: "sample-food-3.jpg"
-      }
+      { name: "매운 라면", type: "한식", img: "sample-food-1.jpg" },
+      { name: "연어 초밥", type: "일식", img: "sample-food-2.jpg" },
+      { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
     ];
 
     function showRecommendation() {
@@ -201,15 +202,17 @@
       document.getElementById('foodImage').src = pick.img;
 
       document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('result').style.display = 'block';
+      document.getElementById('recommendation').style.display = 'flex';
     }
 
     function shareResult() {
-      alert("브라우저에서 지원되지 않는 공유 기능입니다.");
+      alert("브라우저 공유 기능은 추가구현 필요!");
     }
   </script>
+
 </body>
 </html>
+
 
 
 
