@@ -59,7 +59,7 @@
       object-fit: cover;
     }
 
-    /* 버튼 컨테이너: 너비 줄이고, 둥글기 덜게 + 리프팅 효과 */
+    /* 버튼 컨테이너 */
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;
@@ -74,7 +74,6 @@
       transform: translateY(2px);
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
     .btn {
       background: transparent;
       border: none;
@@ -86,17 +85,11 @@
 
     /* Fade‑In Up Keyframes */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* 결과 카드 (애니메이션 적용) */
+    /* 결과 카드 */
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -123,16 +116,19 @@
       border-bottom: 1px solid #eee;
     }
     .circle-icon {
-      width: 36px; height: 36px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background-color: #29b6f6;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 10px;
+      margin-right: 12px;
     }
     .circle-icon img {
-      width: 24px; height: 24px; object-fit: contain;
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
     }
     .place-info {
       display: flex;
@@ -141,10 +137,13 @@
       text-align: left;
     }
     .place-info strong {
-      font-size: 16px; color: #222;
+      font-size: 18px;
+      color: #222;
     }
     .place-info span {
-      font-size: 13px; color: #666; margin-top: 2px;
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
     }
     .card-header-right {
       margin-left: auto;
@@ -158,7 +157,9 @@
       aspect-ratio: 1/1;
     }
     .card-img-container img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .card-footer {
       display: flex;
@@ -176,17 +177,11 @@
       flex: 1;
       text-align: center;
     }
-    .card-footer span:first-child {
-      margin-right: 8px;
-    }
-    .card-footer span:last-child {
-      margin-left: 8px;
-    }
+    .card-footer span:first-child { margin-right: 8px; }
+    .card-footer span:last-child  { margin-left: 8px; }
   </style>
 </head>
-
 <body>
-
   <!-- 시작 화면 -->
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
@@ -214,7 +209,7 @@
       <img id="foodImage" src="" alt="추천 음식 이미지" />
     </div>
     <div class="card-footer">
-      <span onclick="showRecommendation()">💡 다시 추천</span>
+      <span onclick="showRecommendation()">💡 다음 추천</span>
       <span onclick="shareResult()">📤 공유하기</span>
     </div>
   </div>
@@ -222,7 +217,7 @@
   <script>
     const restaurants = [
       { name: "델브리또",   type: "양식", img: "델브리또.jpg" },
-      { name: "어니언스치킨",   type: "양식", img: "sample-food-2.jpg" },
+      { name: "연어 초밥",   type: "일식", img: "sample-food-2.jpg" },
       { name: "불고기 정식", type: "한식", img: "sample-food-3.jpg" }
     ];
 
@@ -235,14 +230,20 @@
       document.getElementById('startScreen').style.display = 'none';
       const result = document.getElementById('resultScreen');
       result.style.display = 'flex';
-      result.getBoundingClientRect(); // animation 재실행용
+      result.getBoundingClientRect();
     }
 
     function shareResult() {
-      alert("공유 기능은 현재 브라우저에서 지원되지 않을 수 있습니다.");
+      const url = window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url)
+          .then(() => alert('링크가 복사되었습니다!'))
+          .catch(() => prompt('URL을 복사하세요:', url));
+      } else {
+        prompt('URL을 복사하세요:', url);
+      }
     }
   </script>
-
 </body>
 </html>
 
