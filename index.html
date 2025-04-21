@@ -59,7 +59,7 @@
       object-fit: cover;
     }
 
-    /* 버튼 컨테이너: 너비 줄이고, 둥글기 덜게 */
+    /* 버튼 컨테이너: 너비 줄이고, 둥글기 덜게 + 리프팅 효과 */
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;      /* 둥글기 덜함 */
@@ -68,7 +68,13 @@
       max-width: 300px;         /* 최대 300px */
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 40px;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
+    .btn-container:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
     .btn {
       background: transparent;
       border: none;
@@ -77,12 +83,20 @@
       font-weight: 900;
       cursor: pointer;
     }
-    .btn:active {
-      transform: scale(0.95);
-      transition: transform 0.1s;
+
+    /* Fade‑In Up Keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* 결과 카드 (기존과 동일) */
+    /* 결과 카드 (애니메이션 적용) */
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -91,10 +105,15 @@
       max-width: 400px;
       background: #ffffff;
       border-radius: 20px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+      box-shadow:
+        0 4px 8px rgba(0,0,0,0.1),
+        0 12px 24px rgba(0,0,0,0.08);
       overflow: hidden;
-      margin-top: 40px;
+      margin-top: 60px;
       margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.3s ease-out forwards;
     }
     .card-header {
       display: flex;
@@ -140,7 +159,7 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 12px 0;
+      padding: 16px 0;
       border-top: 1px solid #eee;
       width: 100%;
     }
@@ -201,7 +220,9 @@
       document.getElementById('foodImage').src = pick.img;
 
       document.getElementById('startScreen').style.display = 'none';
-      document.getElementById('resultScreen').style.display = 'flex';
+      const result = document.getElementById('resultScreen');
+      result.style.display = 'flex';
+      result.getBoundingClientRect(); // animation 재실행용
     }
 
     function shareResult() {
