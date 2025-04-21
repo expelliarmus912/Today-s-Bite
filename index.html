@@ -34,7 +34,7 @@
 
     /* 제목을 더 크게 */
     .title {
-      font-size: 3.5rem;    /* 시안 크기와 비슷하게 키움 */
+      font-size: 3.5rem;
       line-height: 1.1;
       color: #0D3F67;
       font-weight: 900;
@@ -62,10 +62,10 @@
     /* 버튼 컨테이너: 너비 줄이고, 둥글기 덜게 + 리프팅 효과 */
     .btn-container {
       background-color: #ffffff;
-      border-radius: 16px;      /* 둥글기 덜함 */
+      border-radius: 16px;
       padding: 18px 0;
-      width: 80%;               /* 화면 대비 80% */
-      max-width: 300px;         /* 최대 300px */
+      width: 80%;
+      max-width: 300px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 40px;
       transition: box-shadow 0.2s, transform 0.2s;
@@ -100,7 +100,7 @@
     #resultScreen {
       display: none;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       width: 90%;
       max-width: 400px;
       background: #ffffff;
@@ -134,7 +134,12 @@
     .circle-icon img {
       width: 24px; height: 24px; object-fit: contain;
     }
-    .place-info { display: flex; flex-direction: column; }
+    .place-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
     .place-info strong {
       font-size: 16px; color: #222;
     }
@@ -168,6 +173,14 @@
       font-weight: 700;
       cursor: pointer;
       font-size: 14px;
+      flex: 1;
+      text-align: center;
+    }
+    .card-footer span:first-child {
+      margin-right: 8px;
+    }
+    .card-footer span:last-child {
+      margin-left: 8px;
     }
   </style>
 </head>
