@@ -4,14 +4,21 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Cafe24 써라운드 폰트 적용 (정확한 링크) -->
+  <link href="https://webfontworld.github.io/Cafe24Ssurround/Cafe24Ssurround.css" rel="stylesheet">
+
+  <!-- html2canvas 불러오기 -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet" />
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, .title, .btn {
+      font-family: 'Cafe24Ssurround', sans-serif;
+    }
     body {
       height: 100vh;
       background-color: #b3e5fc;
-      font-family: 'Noto Sans KR', sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -31,7 +38,6 @@
     .title {
       font-size: 4.5rem;
       line-height: 1.1;
-      text-align: center;
       font-weight: 900;
       color: #0D3F67;
       margin-bottom: 10px;
@@ -81,9 +87,8 @@
       max-width: 400px;
       background: #ffffff;
       border-radius: 20px;
-      box-shadow:
-        0 4px 8px rgba(0,0,0,0.1),
-        0 12px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1),
+                  0 12px 24px rgba(0,0,0,0.08);
       overflow: hidden;
       margin-top: 60px;
       margin-bottom: 40px;
@@ -164,6 +169,7 @@
     .card-footer span:last-child  { margin-left: 8px; }
   </style>
 </head>
+
 <body>
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
@@ -178,7 +184,7 @@
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
-        <img src="ChatGPT Image 2025년 4월 21일 오후 08_35_46.png" alt="숟가락·포크 아이콘" />
+        <img src="숟가락포크아이콘.png" alt="아이콘" />
       </div>
       <div class="place-info">
         <strong id="foodName">음식 이름</strong>
@@ -209,7 +215,6 @@
       document.getElementById('foodName').textContent = pick.name;
       document.getElementById('foodType').textContent = pick.type;
       document.getElementById('foodImage').src = pick.img;
-
       document.getElementById('startScreen').style.display = 'none';
       const result = document.getElementById('resultScreen');
       result.style.display = 'flex';
@@ -239,6 +244,7 @@
   </script>
 </body>
 </html>
+
 
 
 
