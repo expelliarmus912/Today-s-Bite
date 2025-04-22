@@ -4,177 +4,130 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- html2canvas 불러오기 -->
+  <!-- html2canvas -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
   <style>
-    /* Cafe24 써라운드 폰트 연결 */
+    /* Cafe24 써라운드 폰트 */
     @font-face {
       font-family: 'Cafe24Ssurround';
       src: url('./fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body, .title, .btn { font-family:'Cafe24Ssurround', sans-serif; }
+    body {
+      height:100vh; background-color:#b3e5fc;
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      text-align:center;
+      padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, .title, .btn {
-      font-family: 'Cafe24Ssurround', sans-serif;
+    /* 버튼 클릭 애니메이션 */
+    .btn {
+      background:transparent; border:none;
+      color:#0D3F67; font-size:2.4rem; font-weight:900;
+      cursor:pointer;
+      transition: transform 0.1s ease;
     }
-    body {
-      height: 100vh;
-      background-color: #b3e5fc;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+    .btn:active { transform: scale(0.95); }
+
+    /* 페이드 인·아웃 애니메이션 */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
     }
+    @keyframes fadeOutDown {
+      from { opacity:1; transform:translateY(0); }
+      to   { opacity:0; transform:translateY(20px); }
+    }
+    .fade-in  { animation: fadeInUp   0.3s ease-out forwards; }
+    .fade-out { animation: fadeOutDown 0.3s ease-in  forwards; }
+
+    /* 아이콘 통일 스타일 */
+    .icon {
+      width:24px; height:24px;
+      border-radius:4px;
+      stroke-width:2;
+      vertical-align:middle;
+    }
+
+    /* 시작 화면 */
     #startScreen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      height: 100vh;
-      padding: 60px 20px;
-      background-color: #b3e5fc;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:space-between;
+      height:100vh; padding:60px 20px;
+      background-color:#b3e5fc;
     }
     .title {
-      font-size: 4.5rem;
-      line-height: 1.1;
-      font-weight: 900;
-      color: #0D3F67;
-      margin-bottom: 10px;
+      font-size:4.5rem; line-height:1.1; font-weight:900;
+      color:#0D3F67; margin-bottom:10px;
     }
     .circle {
-      width: 300px;
-      height: 300px;
-      background-color: #81d4fa;
-      border-radius: 50%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px 0 30px 0;
+      width:300px; height:300px;
+      background-color:#81d4fa; border-radius:50%;
+      overflow:hidden; display:flex; justify-content:center;
+      align-items:center; margin:10px 0 30px;
     }
-    .circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .circle img { width:100%; height:100%; object-fit:cover; }
     .btn-container {
-      background-color: #ffffff;
-      border-radius: 16px;
-      padding: 16px 0;
-      width: 95%;
-      max-width: 380px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-      margin-bottom: 20px;
+      background-color:#ffffff; border-radius:16px;
+      padding:16px 0; width:95%; max-width:380px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.15);
+      margin-bottom:20px;
     }
-    .btn {
-      background: transparent;
-      border: none;
-      color: #0D3F67;
-      font-size: 2.4rem;
-      font-weight: 900;
-      cursor: pointer;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+
+    /* 결과 화면 */
     #resultScreen {
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 90%;
-      max-width: 400px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1),
-                  0 12px 24px rgba(0,0,0,0.08);
-      overflow: hidden;
-      margin-top: 60px;
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.3s ease-out forwards;
+      display:none; flex-direction:column;
+      align-items:flex-start; width:90%; max-width:400px;
+      background:#ffffff; border-radius:20px;
+      box-shadow:
+        0 4px 8px rgba(0,0,0,0.1),
+        0 12px 24px rgba(0,0,0,0.08);
+      overflow:hidden; margin:60px 0 40px;
     }
     .card-header {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      padding: 16px;
-      border-bottom: 1px solid #eee;
+      display:flex; align-items:center; width:100%;
+      padding:16px; border-bottom:1px solid #eee;
     }
     .circle-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background-color: #29b6f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 12px;
+      width:48px; height:48px; border-radius:50%;
+      background-color:#29b6f6; display:flex;
+      justify-content:center; align-items:center;
+      margin-right:12px;
     }
-    .circle-icon img {
-      width: 32px;
-      height: 32px;
-      object-fit: contain;
-    }
+    .circle-icon img.icon { width:32px; height:32px; }
     .place-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
+      display:flex; flex-direction:column;
+      align-items:flex-start; text-align:left;
     }
-    .place-info strong {
-      font-size: 18px;
-      color: #222;
-    }
-    .place-info span {
-      font-size: 14px;
-      color: #666;
-      margin-top: 4px;
-    }
+    .place-info strong { font-size:18px; color:#222; }
+    .place-info span  { font-size:14px; color:#666; margin-top:4px; }
     .card-header-right {
-      margin-left: auto;
-      font-size: 2rem;
-      color: #999;
-      cursor: pointer;
+      margin-left:auto; cursor:pointer;
     }
+    .card-header-right img.icon { width:24px; height:24px; }
     .card-img-container {
-      width: 100%;
-      background-color: #e0f7fa;
-      aspect-ratio: 1/1;
+      width:100%; background-color:#e0f7fa;
+      aspect-ratio:1/1;
     }
     .card-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width:100%; height:100%; object-fit:cover;
     }
     .card-footer {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 16px 0;
-      border-top: 1px solid #eee;
-      width: 100%;
+      display:flex; justify-content:space-around;
+      align-items:center; padding:16px 0;
+      border-top:1px solid #eee; width:100%;
     }
     .card-footer span {
-      color: #2196f3;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 14px;
-      flex: 1;
-      text-align: center;
+      display:flex; align-items:center;
+      justify-content:center; flex:1; cursor:pointer;
+      font-size:14px; font-weight:700; color:#2196f3;
     }
-    .card-footer span:first-child { margin-right: 8px; }
-    .card-footer span:last-child  { margin-left: 8px; }
+    .card-footer span + span { margin-left:8px; }
+    .card-footer span img.icon { margin-right:6px; }
   </style>
 </head>
-
 <body>
   <!-- 시작 화면 -->
   <div id="startScreen">
@@ -191,57 +144,72 @@
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
-        <img src="숟가락포크아이콘.png" alt="아이콘" />
+        <img src="icons/spoon-fork.svg" alt="아이콘" class="icon" />
       </div>
       <div class="place-info">
         <strong id="foodName">음식 이름</strong>
         <span id="foodType">음식 종류</span>
       </div>
-      <div class="card-header-right" onclick="showRecommendation()">⋯</div> <!-- 여기 점3개로 변경 -->
+      <!-- 점 세 개 아이콘: 오른쪽 맨 끝 -->
+      <div class="card-header-right" onclick="showRecommendation()">
+        <img src="icons/more.svg" alt="더보기" class="icon" />
+      </div>
     </div>
     <div class="card-img-container">
       <img id="foodImage" src="" alt="추천 음식 이미지" />
     </div>
     <div class="card-footer">
-      <span onclick="showRecommendation()">💡 다음 추천</span>
-      <span onclick="shareResult()">📤 공유하기</span>
+      <span onclick="showRecommendation()">
+        <img src="icons/lightbulb.svg" alt="다음 추천" class="icon" />다음 추천
+      </span>
+      <span onclick="shareResult()">
+        <img src="icons/share.svg" alt="공유하기" class="icon" />공유하기
+      </span>
     </div>
   </div>
 
   <script>
     const restaurants = [
-      { name: "델브리또", type: "양식", img: "델브리또.jpg" },
-      { name: "어니언스치킨", type: "양식", img: "어니언스치킨.jpg" },
-      { name: "짬뽕공장", type: "중식", img: "짬뽕공장.jpg" },
-      { name: "류헤이", type: "일식", img: "류헤이.jpg" },
-      { name: "진미식당", type: "한식", img: "진미식당.jpg" }
+      { name: "델브리또",      type: "양식", img: "델브리또.jpg" },
+      { name: "어니언스치킨",  type: "양식", img: "어니언스치킨.jpg" },
+      { name: "짬뽕공장",      type: "중식", img: "짬뽕공장.jpg" },
+      { name: "류헤이",        type: "일식", img: "류헤이.jpg" },
+      { name: "진미식당",      type: "한식", img: "진미식당.jpg" }
     ];
+    const startScreen  = document.getElementById('startScreen');
+    const resultScreen = document.getElementById('resultScreen');
 
-    function showRecommendation() {
-      const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+    function updateContent(pick) {
       document.getElementById('foodName').textContent = pick.name;
       document.getElementById('foodType').textContent = pick.type;
       document.getElementById('foodImage').src = pick.img;
-      document.getElementById('startScreen').style.display = 'none';
-      const result = document.getElementById('resultScreen');
-      result.style.display = 'flex';
-      result.style.opacity = '0';
-      result.style.transform = 'translateY(20px)';
-      result.getBoundingClientRect();
-      result.style.animation = 'fadeInUp 0.3s ease-out forwards';
+    }
+
+    function showRecommendation() {
+      const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+      if (resultScreen.style.display === 'flex') {
+        resultScreen.classList.remove('fade-in');
+        resultScreen.classList.add('fade-out');
+        resultScreen.addEventListener('animationend', function handler() {
+          resultScreen.removeEventListener('animationend', handler);
+          updateContent(pick);
+          resultScreen.classList.remove('fade-out');
+          resultScreen.classList.add('fade-in');
+        });
+      } else {
+        startScreen.style.display = 'none';
+        updateContent(pick);
+        resultScreen.style.display = 'flex';
+        resultScreen.classList.add('fade-in');
+      }
     }
 
     function shareResult() {
-      const area = document.getElementById('resultScreen');
-      html2canvas(area).then(canvas => {
+      html2canvas(resultScreen).then(canvas => {
         canvas.toBlob(blob => {
           const file = new File([blob], '추천식당.png', { type: 'image/png' });
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({
-              files: [file],
-              title: '오늘 뭐 먹지?',
-              text: '오늘 여기 어때요?'
-            });
+            navigator.share({ files: [file], title: '오늘 뭐 먹지?', text : '오늘 여기 어때요?' });
           } else {
             alert("이 브라우저에서는 이미지 공유를 지원하지 않습니다.");
           }
