@@ -140,7 +140,7 @@
     }
     .card-header-right {
       margin-left: auto;
-      font-size: 1.3rem;
+      font-size: 2rem;
       color: #999;
       cursor: pointer;
     }
@@ -176,6 +176,7 @@
 </head>
 
 <body>
+  <!-- 시작 화면 -->
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
     <div class="circle">
@@ -186,6 +187,7 @@
     </div>
   </div>
 
+  <!-- 결과 화면 -->
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
@@ -195,7 +197,7 @@
         <strong id="foodName">음식 이름</strong>
         <span id="foodType">음식 종류</span>
       </div>
-      <div class="card-header-right" onclick="showRecommendation()">⟳</div>
+      <div class="card-header-right" onclick="showRecommendation()">⋯</div> <!-- 여기 점3개로 변경 -->
     </div>
     <div class="card-img-container">
       <img id="foodImage" src="" alt="추천 음식 이미지" />
