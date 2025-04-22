@@ -4,15 +4,9 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- html2canvas 불러오기 -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <!-- 굵은 한글 서체 -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet" />
   <style>
-    /* 기존 스타일 그대로 유지 */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       height: 100vh;
@@ -25,7 +19,6 @@
       text-align: center;
       padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
-    /* 시작 화면 전체 정렬 */
     #startScreen {
       display: flex;
       flex-direction: column;
@@ -58,9 +51,9 @@
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;
-      padding: 18px 0;
-      width: 80%;
-      max-width: 300px;
+      padding: 24px 0;
+      width: 70%;
+      max-width: 240px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 40px;
       transition: box-shadow 0.2s, transform 0.2s;
@@ -73,7 +66,7 @@
       background: transparent;
       border: none;
       color: #0D3F67;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 900;
       cursor: pointer;
     }
@@ -173,7 +166,6 @@
   </style>
 </head>
 <body>
-  <!-- 시작 화면 -->
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
     <div class="circle">
@@ -184,7 +176,6 @@
     </div>
   </div>
 
-  <!-- 결과 화면 (캡처 대상) -->
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
@@ -201,17 +192,16 @@
     </div>
     <div class="card-footer">
       <span onclick="showRecommendation()">💡 다음 추천</span>
-      <!-- 공유하기 -->
       <span onclick="shareResult()">📤 공유하기</span>
     </div>
   </div>
 
   <script>
     const restaurants = [
-      { name: "델브리또",   type: "양식", img: "델브리또.jpg" },
-      { name: "어니언스치킨",   type: "양식", img: "어니언스치킨.jpg" },
+      { name: "델브리또", type: "양식", img: "델브리또.jpg" },
+      { name: "어니언스치킨", type: "양식", img: "어니언스치킨.jpg" },
       { name: "짬뽕공장", type: "중식", img: "짬뽕공장.jpg" },
-      { name: "류헤이",   type: "일식", img: "류헤이.jpg" },
+      { name: "류헤이", type: "일식", img: "류헤이.jpg" },
       { name: "진미식당", type: "한식", img: "진미식당.jpg" }
     ];
 
@@ -224,10 +214,8 @@
       document.getElementById('startScreen').style.display = 'none';
       const result = document.getElementById('resultScreen');
       result.style.display = 'flex';
-      // 캡처 전 애니메이션 리셋
       result.style.opacity = '0';
       result.style.transform = 'translateY(20px)';
-      // 강제 reflow 후 애니메이션 트리거
       result.getBoundingClientRect();
       result.style.animation = 'fadeInUp 0.3s ease-out forwards';
     }
