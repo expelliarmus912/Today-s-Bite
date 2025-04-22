@@ -5,13 +5,18 @@
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Cafe24 써라운드 폰트 적용 (정확한 링크) -->
-  <link href="https://webfontworld.github.io/Cafe24Ssurround/Cafe24Ssurround.css" rel="stylesheet">
-
   <!-- html2canvas 불러오기 -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
   <style>
+    /* Cafe24 써라운드 폰트 연결 */
+    @font-face {
+      font-family: 'Cafe24Ssurround';
+      src: url('./fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body, .title, .btn {
       font-family: 'Cafe24Ssurround', sans-serif;
@@ -174,7 +179,7 @@
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
     <div class="circle">
-      <img src="boy-icon1.png" alt="아이 이미지" />
+      <img src="아이이미지.png" alt="아이 이미지" />
     </div>
     <div class="btn-container">
       <button class="btn" onclick="showRecommendation()">추천받기</button>
@@ -244,8 +249,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
