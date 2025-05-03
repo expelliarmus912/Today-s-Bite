@@ -12,10 +12,10 @@
       font-display: swap;
     }
     html, body, * {
-      font-family: 'Cafe24Ssurround', sans-serif;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Cafe24Ssurround', sans-serif;
     }
     body {
       height: 100vh;
@@ -36,13 +36,16 @@
       cursor: pointer;
       transition: transform 0.1s ease;
     }
-    .btn:active { transform: scale(0.95); }
+    .btn:active {
+      transform: scale(0.95);
+    }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .fade-in { animation: fadeInUp 0.3s ease-out; }
-
+    .fade-in {
+      animation: fadeInUp 0.3s ease-out;
+    }
     #startScreen {
       display: flex;
       flex-direction: column;
@@ -69,7 +72,11 @@
       align-items: center;
       margin: 10px 0 30px;
     }
-    .circle img { width: 100%; height: 100%; object-fit: cover; }
+    .circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;
@@ -79,7 +86,6 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 20px;
     }
-
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -98,30 +104,41 @@
       display: flex;
       align-items: center;
       width: 100%;
-      /* 헤더 높이를 원본 비율로 유지하도록 패딩 최소화 */
-      padding: 4px 16px 4px 12px;
+      padding: 6px 12px;
+      height: 56px;
       border-bottom: 1px solid #eee;
     }
     .circle-icon {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       overflow: hidden;
       background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 8px;
+      margin-right: 6px;
     }
-    .circle-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .circle-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .place-info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
     }
-    .place-info strong { font-size: 18px; color: #222; }
-    .place-info span  { font-size: 14px; color: #666; margin-top: 4px; }
+    .place-info strong {
+      font-size: 16px;
+      color: #222;
+    }
+    .place-info span {
+      font-size: 12px;
+      color: #666;
+      margin-top: 2px;
+    }
     .card-header-right {
       margin-left: auto;
       font-size: 1.6rem;
@@ -131,14 +148,18 @@
       padding: 4px;
     }
     .card-img-container {
-      width: 100%; background-color: #e0f7fa;
+      width: 100%;
+      background-color: #e0f7fa;
       aspect-ratio: 1 / 1;
     }
     .card-img-container img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .card-footer {
-      display: flex; justify-content: space-around;
+      display: flex;
+      justify-content: space-around;
       align-items: center;
       padding: 16px 0;
       border-top: 1px solid #eee;
@@ -189,7 +210,7 @@
       { name: "어니언스치킨", type: "양식", img: "어니언스치킨.jpg" },
       { name: "짬뽕공장", type: "중식", img: "짬뽕공장.jpg" },
       { name: "류헤이", type: "일식", img: "류헤이.jpg" },
-      { name: "진미식당", type: "한식", img: "진ми식당.jpg" },
+      { name: "진미식당", type: "한식", img: "진미식당.jpg" },
       { name: "끄티식당", type: "일식", img: "끄티식당.jpg" },
       { name: "창평돼지국밥", type: "한식", img: "창평돼지국밥.jpg" },
       { name: "하동돈가스", type: "일식", img: "하동돈가스.jpg" },
@@ -199,29 +220,24 @@
       { name: "밀밭수제비", type: "한식", img: "밀밭수제비.jpg" },
       { name: "남매컵밥", type: "한식", img: "남매컵밥.jpg" }
     ];
-
     const startScreen = document.getElementById('startScreen');
     const resultScreen = document.getElementById('resultScreen');
     let recentPicks = [];
-
     function getUniqueRecommendation() {
       let pick, attempts = 0;
       do {
         pick = restaurants[Math.floor(Math.random() * restaurants.length)];
         attempts++;
       } while (recentPicks.includes(pick.name) && attempts < 10);
-
       recentPicks.push(pick.name);
       if (recentPicks.length > 3) recentPicks.shift();
       return pick;
     }
-
     function updateContent(pick) {
       document.getElementById('foodName').textContent = pick.name;
       document.getElementById('foodType').textContent = pick.type;
       document.getElementById('foodImage').src = pick.img;
     }
-
     function showRecommendation() {
       const pick = getUniqueRecommendation();
       updateContent(pick);
@@ -235,7 +251,6 @@
         resultScreen.classList.add('fade-in');
       }
     }
-
     function shareResult() {
       html2canvas(resultScreen).then(canvas => {
         canvas.toBlob(blob => {
