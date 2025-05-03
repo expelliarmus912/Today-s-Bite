@@ -104,13 +104,14 @@
       display: flex;
       align-items: center;
       width: 100%;
-      padding: 16px;
+      /* 상하 패딩을 줄여 헤더 높이를 고정 비율로 유지 */
+      padding: 8px 16px;
       border-bottom: 1px solid #eee;
     }
-    /* 아이콘 사이즈를 키웠습니다 */
+    /* 아이콘 사이즈를 조절해도 헤더 높이가 크게 변하지 않도록 padding 조정 완료 */
     .circle-icon {
-      width: 72px;
-      height: 72px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       overflow: hidden;
       background-color: #ffffff;
@@ -187,7 +188,6 @@
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
-        <!-- 항상 고정된 아이콘 이미지 -->
         <img src="icons/restaurant-icon.png" alt="식당 아이콘" />
       </div>
       <div class="place-info">
