@@ -11,22 +11,22 @@
       src: url('./fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
       font-display: swap;
     }
-
-    /* 전체 요소에 커스텀 폰트 전역 적용 */
     html, body, * {
       font-family: 'Cafe24Ssurround', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       height: 100vh;
       background-color: #b3e5fc;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
-
     .btn {
       background: transparent;
       border: none;
@@ -36,14 +36,16 @@
       cursor: pointer;
       transition: transform 0.1s ease;
     }
-    .btn:active { transform: scale(0.95); }
-
+    .btn:active {
+      transform: scale(0.95);
+    }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .fade-in { animation: fadeInUp 0.3s ease-out; }
-
+    .fade-in {
+      animation: fadeInUp 0.3s ease-out;
+    }
     #startScreen {
       display: flex;
       flex-direction: column;
@@ -51,7 +53,6 @@
       justify-content: space-between;
       height: 100vh;
       padding: 60px 20px;
-      background-color: #b3e5fc;
     }
     .title {
       font-size: 4.5rem;
@@ -71,7 +72,11 @@
       align-items: center;
       margin: 10px 0 30px;
     }
-    .circle img { width: 100%; height: 100%; object-fit: cover; }
+    .circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;
@@ -81,7 +86,6 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 20px;
     }
-
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -107,31 +111,40 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background-color: #29b6f6;
+      overflow: hidden;
+      background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-right: 12px;
     }
-    .circle-icon img { width: 32px; height: 32px; }
+    .circle-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .place-info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
     }
-    .place-info strong { font-size: 18px; color: #222; }
-    .place-info span { font-size: 14px; color: #666; margin-top: 4px; }
-
+    .place-info strong {
+      font-size: 18px;
+      color: #222;
+    }
+    .place-info span {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
     .card-header-right {
       margin-left: auto;
       font-size: 1.6rem;
       line-height: 1;
       color: #999;
-      cursor: default;
       user-select: none;
     }
-
     .card-img-container {
       width: 100%;
       background-color: #e0f7fa;
@@ -151,16 +164,13 @@
       width: 100%;
     }
     .card-footer span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex: 1;
-      cursor: pointer;
+      text-align: center;
       font-size: 14px;
       font-weight: 700;
       color: #2196f3;
+      cursor: pointer;
     }
-    .card-footer span + span { margin-left: 8px; }
   </style>
 </head>
 <body>
@@ -173,11 +183,11 @@
       <button class="btn" onclick="showRecommendation()">추천받기</button>
     </div>
   </div>
-
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
-        <img src="icons/spoon-fork.svg" alt="아이콘" />
+        <!-- 항상 고정된 아이콘 이미지 -->
+        <img src="icons/restaurant-icon.png" alt="식당 아이콘" />
       </div>
       <div class="place-info">
         <strong id="foodName">음식 이름</strong>
@@ -193,7 +203,6 @@
       <span onclick="shareResult()">공유하기</span>
     </div>
   </div>
-
   <script>
     const restaurants = [
       { name: "델브리또", type: "양식", img: "델브리또.jpg" },
@@ -236,7 +245,6 @@
     function showRecommendation() {
       const pick = getUniqueRecommendation();
       updateContent(pick);
-
       if (resultScreen.style.display === 'flex') {
         resultScreen.classList.remove('fade-in');
         void resultScreen.offsetWidth;
@@ -263,6 +271,5 @@
   </script>
 </body>
 </html>
-
 
 
