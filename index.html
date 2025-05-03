@@ -32,12 +32,7 @@
       from { opacity:0; transform:translateY(20px); }
       to   { opacity:1; transform:translateY(0); }
     }
-    @keyframes fadeOutDown {
-      from { opacity:1; transform:translateY(0); }
-      to   { opacity:0; transform:translateY(20px); }
-    }
-    .fade-in  { animation: fadeInUp   0.3s ease-out forwards; }
-    .fade-out { animation: fadeOutDown 0.3s ease-in  forwards; }
+    .fade-in { animation: fadeInUp 0.3s ease-out; }
 
     .icon {
       width:24px; height:24px;
@@ -74,9 +69,8 @@
       display:none; flex-direction:column;
       align-items:flex-start; width:90%; max-width:400px;
       background:#ffffff; border-radius:20px;
-      box-shadow:
-        0 4px 8px rgba(0,0,0,0.1),
-        0 12px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1),
+                  0 12px 24px rgba(0,0,0,0.08);
       overflow:hidden; margin:60px 0 40px;
     }
     .card-header {
@@ -180,8 +174,7 @@
     let recentPicks = [];
 
     function getUniqueRecommendation() {
-      let pick;
-      let attempts = 0;
+      let pick, attempts = 0;
       do {
         pick = restaurants[Math.floor(Math.random() * restaurants.length)];
         attempts++;
@@ -200,18 +193,14 @@
 
     function showRecommendation() {
       const pick = getUniqueRecommendation();
+      updateContent(pick);
+
       if (resultScreen.style.display === 'flex') {
         resultScreen.classList.remove('fade-in');
-        resultScreen.classList.add('fade-out');
-        resultScreen.addEventListener('animationend', function handler() {
-          resultScreen.removeEventListener('animationend', handler);
-          updateContent(pick);
-          resultScreen.classList.remove('fade-out');
-          resultScreen.classList.add('fade-in');
-        });
+        void resultScreen.offsetWidth; // 애니메이션 재적용용 트릭
+        resultScreen.classList.add('fade-in');
       } else {
         startScreen.style.display = 'none';
-        updateContent(pick);
         resultScreen.style.display = 'flex';
         resultScreen.classList.add('fade-in');
       }
@@ -236,5 +225,6 @@
   </script>
 </body>
 </html>
+
 
 
