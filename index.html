@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- html2canvas -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <style>
-    /* Cafe24 써라운드 폰트 */
     @font-face {
       font-family: 'Cafe24Ssurround';
       src: url('./fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
@@ -22,7 +20,6 @@
       padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
 
-    /* 버튼 클릭 애니메이션 */
     .btn {
       background:transparent; border:none;
       color:#0D3F67; font-size:2.4rem; font-weight:900;
@@ -31,7 +28,6 @@
     }
     .btn:active { transform: scale(0.95); }
 
-    /* 페이드 인·아웃 애니메이션 */
     @keyframes fadeInUp {
       from { opacity:0; transform:translateY(20px); }
       to   { opacity:1; transform:translateY(0); }
@@ -43,7 +39,6 @@
     .fade-in  { animation: fadeInUp   0.3s ease-out forwards; }
     .fade-out { animation: fadeOutDown 0.3s ease-in  forwards; }
 
-    /* 아이콘 통일 스타일 */
     .icon {
       width:24px; height:24px;
       border-radius:4px;
@@ -51,7 +46,6 @@
       vertical-align:middle;
     }
 
-    /* 시작 화면 */
     #startScreen {
       display:flex; flex-direction:column;
       align-items:center; justify-content:space-between;
@@ -76,7 +70,6 @@
       margin-bottom:20px;
     }
 
-    /* 결과 화면 */
     #resultScreen {
       display:none; flex-direction:column;
       align-items:flex-start; width:90%; max-width:400px;
@@ -129,7 +122,6 @@
   </style>
 </head>
 <body>
-  <!-- 시작 화면 -->
   <div id="startScreen">
     <div class="title">오늘 뭐<br>먹지?</div>
     <div class="circle">
@@ -140,7 +132,6 @@
     </div>
   </div>
 
-  <!-- 결과 화면 -->
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
@@ -150,7 +141,6 @@
         <strong id="foodName">음식 이름</strong>
         <span id="foodType">음식 종류</span>
       </div>
-      <!-- 점 세 개 아이콘: 오른쪽 맨 끝 -->
       <div class="card-header-right" onclick="showRecommendation()">
         <img src="icons/more.svg" alt="더보기" class="icon" />
       </div>
@@ -170,23 +160,37 @@
 
   <script>
     const restaurants = [
-      { name: "델브리또",      type: "양식", img: "델브리또.jpg" },
-      { name: "어니언스치킨",  type: "양식", img: "어니언스치킨.jpg" },
-      { name: "짬뽕공장",      type: "중식", img: "짬뽕공장.jpg" },
-      { name: "류헤이",        type: "일식", img: "류헤이.jpg" },
-      { name: "진미식당",      type: "한식", img: "진미식당.jpg" },
-      { name: "끄티식당",        type: "일식", img: "끄티식당.jpg" },
-      { name: "창평돼지국밥",      type: "한식", img: "창평돼지국밥.jpg" },
-      { name: "하동돈가스",      type: "일식", img: "하동돈가스.jpg" },
-      { name: "경아네집밥",      type: "한식", img: "경아네집밥.jpg" },
-      { name: "반천촌국수",      type: "한식", img: "반천촌국수.jpg" },
-      { name: "개척돈가스",      type: "일식", img: "개척돈가스.jpg" },
-      { name: "밀밭수제비",      type: "한식", img: "밀밭수제비.jpg" },
-      { name: "남매컵밥",      type: "한식", img: "남매컵밥.jpg" }
-      
+      { name: "델브리또", type: "양식", img: "델브리또.jpg" },
+      { name: "어니언스치킨", type: "양식", img: "어니언스치킨.jpg" },
+      { name: "짬뽕공장", type: "중식", img: "짬뽕공장.jpg" },
+      { name: "류헤이", type: "일식", img: "류헤이.jpg" },
+      { name: "진미식당", type: "한식", img: "진미식당.jpg" },
+      { name: "끄티식당", type: "일식", img: "끄티식당.jpg" },
+      { name: "창평돼지국밥", type: "한식", img: "창평돼지국밥.jpg" },
+      { name: "하동돈가스", type: "일식", img: "하동돈가스.jpg" },
+      { name: "경아네집밥", type: "한식", img: "경아네집밥.jpg" },
+      { name: "반천촌국수", type: "한식", img: "반천촌국수.jpg" },
+      { name: "개척돈가스", type: "일식", img: "개척돈가스.jpg" },
+      { name: "밀밭수제비", type: "한식", img: "밀밭수제비.jpg" },
+      { name: "남매컵밥", type: "한식", img: "남매컵밥.jpg" }
     ];
-    const startScreen  = document.getElementById('startScreen');
+
+    const startScreen = document.getElementById('startScreen');
     const resultScreen = document.getElementById('resultScreen');
+    let recentPicks = [];
+
+    function getUniqueRecommendation() {
+      let pick;
+      let attempts = 0;
+      do {
+        pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+        attempts++;
+      } while (recentPicks.includes(pick.name) && attempts < 10);
+
+      recentPicks.push(pick.name);
+      if (recentPicks.length > 3) recentPicks.shift();
+      return pick;
+    }
 
     function updateContent(pick) {
       document.getElementById('foodName').textContent = pick.name;
@@ -195,7 +199,7 @@
     }
 
     function showRecommendation() {
-      const pick = restaurants[Math.floor(Math.random() * restaurants.length)];
+      const pick = getUniqueRecommendation();
       if (resultScreen.style.display === 'flex') {
         resultScreen.classList.remove('fade-in');
         resultScreen.classList.add('fade-out');
@@ -218,7 +222,11 @@
         canvas.toBlob(blob => {
           const file = new File([blob], '추천식당.png', { type: 'image/png' });
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({ files: [file], title: '오늘 뭐 먹지?', text : '오늘 여기 어때요?' });
+            navigator.share({
+              files: [file],
+              title: '오늘 뭐 먹지?',
+              text: '오늘 여기 어때요?'
+            });
           } else {
             alert("이 브라우저에서는 이미지 공유를 지원하지 않습니다.");
           }
@@ -228,7 +236,5 @@
   </script>
 </body>
 </html>
-
-
 
 
