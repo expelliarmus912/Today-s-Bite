@@ -36,16 +36,13 @@
       cursor: pointer;
       transition: transform 0.1s ease;
     }
-    .btn:active {
-      transform: scale(0.95);
-    }
+    .btn:active { transform: scale(0.95); }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .fade-in {
-      animation: fadeInUp 0.3s ease-out;
-    }
+    .fade-in { animation: fadeInUp 0.3s ease-out; }
+
     #startScreen {
       display: flex;
       flex-direction: column;
@@ -72,11 +69,7 @@
       align-items: center;
       margin: 10px 0 30px;
     }
-    .circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .circle img { width: 100%; height: 100%; object-fit: cover; }
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;
@@ -86,6 +79,7 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 20px;
     }
+
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -104,42 +98,31 @@
       display: flex;
       align-items: center;
       width: 100%;
-      /* 상하 패딩을 줄여 헤더 높이를 고정 비율로 유지 */
-      padding: 8px 16px;
+      /* 왼쪽 패딩을 줄여 내용 전체를 왼쪽으로 이동 */
+      padding: 8px 16px 8px 12px;
       border-bottom: 1px solid #eee;
     }
-    /* 아이콘 사이즈를 조절해도 헤더 높이가 크게 변하지 않도록 padding 조정 완료 */
     .circle-icon {
-      width: 70px;
-      height: 70px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       overflow: hidden;
       background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 12px;
+      /* 아이콘과 이름의 간격을 줄임 */
+      margin-right: 8px;
     }
-    .circle-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .circle-icon img { width: 100%; height: 100%; object-fit: cover; }
     .place-info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
     }
-    .place-info strong {
-      font-size: 18px;
-      color: #222;
-    }
-    .place-info span {
-      font-size: 14px;
-      color: #666;
-      margin-top: 4px;
-    }
+    .place-info strong { font-size: 18px; color: #222; }
+    .place-info span  { font-size: 14px; color: #666; margin-top: 4px; }
     .card-header-right {
       margin-left: auto;
       font-size: 1.6rem;
@@ -148,18 +131,14 @@
       user-select: none;
     }
     .card-img-container {
-      width: 100%;
-      background-color: #e0f7fa;
+      width: 100%; background-color: #e0f7fa;
       aspect-ratio: 1 / 1;
     }
     .card-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover;
     }
     .card-footer {
-      display: flex;
-      justify-content: space-around;
+      display: flex; justify-content: space-around;
       align-items: center;
       padding: 16px 0;
       border-top: 1px solid #eee;
@@ -272,5 +251,4 @@
   </script>
 </body>
 </html>
-
 
