@@ -10,120 +10,124 @@
       font-family: 'Cafe24Ssurround';
       src: url('./fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body, .title, .btn { font-family:'Cafe24Ssurround', sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, .title, .btn { font-family: 'Cafe24Ssurround', sans-serif; }
     body {
-      height:100vh; background-color:#b3e5fc;
-      display:flex; flex-direction:column;
-      justify-content:center; align-items:center;
-      text-align:center;
-      padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+      height: 100vh;
+      background-color: #b3e5fc;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
 
     .btn {
-      background:transparent; border:none;
-      color:#0D3F67; font-size:2.4rem; font-weight:900;
-      cursor:pointer;
+      background: transparent; border: none;
+      color: #0D3F67;
+      font-size: 2.4rem; font-weight: 900;
+      cursor: pointer;
       transition: transform 0.1s ease;
     }
     .btn:active { transform: scale(0.95); }
 
     @keyframes fadeInUp {
-      from { opacity:0; transform:translateY(20px); }
-      to   { opacity:1; transform:translateY(0); }
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .fade-in { animation: fadeInUp 0.3s ease-out; }
 
     .icon {
-      width:24px; height:24px;
-      border-radius:4px;
-      stroke-width:2;
-      vertical-align:middle;
+      width: 24px; height: 24px;
+      border-radius: 4px;
+      vertical-align: middle;
     }
 
     #startScreen {
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:space-between;
-      height:100vh; padding:60px 20px;
-      background-color:#b3e5fc;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: space-between;
+      height: 100vh; padding: 60px 20px;
+      background-color: #b3e5fc;
     }
     .title {
-      font-size:4.5rem; line-height:1.1; font-weight:900;
-      color:#0D3F67; margin-bottom:10px;
+      font-size: 4.5rem; line-height: 1.1; font-weight: 900;
+      color: #0D3F67; margin-bottom: 10px;
     }
     .circle {
-      width:300px; height:300px;
-      background-color:#81d4fa; border-radius:50%;
-      overflow:hidden; display:flex; justify-content:center;
-      align-items:center; margin:10px 0 30px;
+      width: 300px; height: 300px;
+      background-color: #81d4fa; border-radius: 50%;
+      overflow: hidden;
+      display: flex; justify-content: center; align-items: center;
+      margin: 10px 0 30px;
     }
-    .circle img { width:100%; height:100%; object-fit:cover; }
+    .circle img { width: 100%; height: 100%; object-fit: cover; }
     .btn-container {
-      background-color:#ffffff; border-radius:16px;
-      padding:16px 0; width:95%; max-width:380px;
-      box-shadow:0 6px 16px rgba(0,0,0,0.15);
-      margin-bottom:20px;
+      background-color: #ffffff; border-radius: 16px;
+      padding: 16px 0; width: 95%; max-width: 380px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
     }
 
     #resultScreen {
-      display:none; flex-direction:column;
-      align-items:flex-start; width:90%; max-width:400px;
-      background:#ffffff; border-radius:20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1),
-                  0 12px 24px rgba(0,0,0,0.08);
-      overflow:hidden; margin:60px 0 40px;
+      display: none; flex-direction: column;
+      align-items: flex-start;
+      width: 90%; max-width: 400px;
+      background: #ffffff; border-radius: 20px;
+      box-shadow:
+        0 4px 8px rgba(0,0,0,0.1),
+        0 12px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+      margin: 60px 0 40px;
     }
     .card-header {
-      display:flex; align-items:center; width:100%;
-      padding:16px; border-bottom:1px solid #eee;
+      display: flex; align-items: center; width: 100%;
+      padding: 16px; border-bottom: 1px solid #eee;
     }
     .circle-icon {
-      width:48px; height:48px; border-radius:50%;
-      background-color:#29b6f6; display:flex;
-      justify-content:center; align-items:center;
-      margin-right:12px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background-color: #29b6f6;
+      display: flex; justify-content: center; align-items: center;
+      margin-right: 12px;
     }
-    .circle-icon img.icon { width:32px; height:32px; }
+    .circle-icon img.icon { width: 32px; height: 32px; }
     .place-info {
-      display:flex; flex-direction:column;
-      align-items:flex-start; text-align:left;
+      display: flex; flex-direction: column;
+      align-items: flex-start; text-align: left;
     }
-    .place-info strong { font-size:18px; color:#222; }
-    .place-info span  { font-size:14px; color:#666; margin-top:4px; }
-
-    /* --- 새롭게 추가된 메뉴 아이콘 스타일 --- */
-    .card-header-menu {
-      margin: 0 8px;           /* 이름과 더보기 버튼 사이 여백 */
-      font-size: 1.6rem;       /* 점 크기 */
-      line-height: 1;          /* 세 점 모양 균등 배치 */
-      color: #999;             /* 연한 회색 */
-      cursor: default;         /* 클릭 커서 안 바뀌게 */
-      user-select: none;       /* 드래그 방지 */
-    }
+    .place-info strong { font-size: 18px; color: #222; }
+    .place-info span  { font-size: 14px; color: #666; margin-top: 4px; }
 
     .card-header-right {
-      margin-left:auto; cursor:pointer;
+      margin-left: auto;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: #999;
+      cursor: default;
+      user-select: none;
     }
-    .card-header-right img.icon { width:24px; height:24px; }
+
     .card-img-container {
-      width:100%; background-color:#e0f7fa;
-      aspect-ratio:1/1;
+      width: 100%; background-color: #e0f7fa;
+      aspect-ratio: 1 / 1;
     }
     .card-img-container img {
-      width:100%; height:100%; object-fit:cover;
+      width: 100%; height: 100%; object-fit: cover;
     }
     .card-footer {
-      display:flex; justify-content:space-around;
-      align-items:center; padding:16px 0;
-      border-top:1px solid #eee; width:100%;
+      display: flex; justify-content: space-around;
+      align-items: center;
+      padding: 16px 0;
+      border-top: 1px solid #eee;
+      width: 100%;
     }
     .card-footer span {
-      display:flex; align-items:center;
-      justify-content:center; flex:1; cursor:pointer;
-      font-size:14px; font-weight:700; color:#2196f3;
+      display: flex; align-items: center;
+      justify-content: center;
+      flex: 1; cursor: pointer;
+      font-size: 14px; font-weight: 700;
+      color: #2196f3;
     }
-    .card-footer span + span { margin-left:8px; }
-    .card-footer span img.icon { margin-right:6px; }
+    .card-footer span + span { margin-left: 8px; }
+    .card-footer span img.icon { margin-right: 6px; }
   </style>
 </head>
 <body>
@@ -146,11 +150,7 @@
         <strong id="foodName">음식 이름</strong>
         <span id="foodType">음식 종류</span>
       </div>
-      <!-- 인스타 스타일 메뉴 점 3개 -->
-      <div class="card-header-menu">⋯</div>
-      <div class="card-header-right" onclick="showRecommendation()">
-        <img src="icons/more.svg" alt="더보기" class="icon" />
-      </div>
+      <div class="card-header-right" onclick="showRecommendation()">⋯</div>
     </div>
     <div class="card-img-container">
       <img id="foodImage" src="" alt="추천 음식 이미지" />
@@ -238,6 +238,7 @@
   </script>
 </body>
 </html>
+
 
 
 
