@@ -90,6 +90,17 @@
     }
     .place-info strong { font-size:18px; color:#222; }
     .place-info span  { font-size:14px; color:#666; margin-top:4px; }
+
+    /* --- 새롭게 추가된 메뉴 아이콘 스타일 --- */
+    .card-header-menu {
+      margin: 0 8px;           /* 이름과 더보기 버튼 사이 여백 */
+      font-size: 1.6rem;       /* 점 크기 */
+      line-height: 1;          /* 세 점 모양 균등 배치 */
+      color: #999;             /* 연한 회색 */
+      cursor: default;         /* 클릭 커서 안 바뀌게 */
+      user-select: none;       /* 드래그 방지 */
+    }
+
     .card-header-right {
       margin-left:auto; cursor:pointer;
     }
@@ -135,6 +146,8 @@
         <strong id="foodName">음식 이름</strong>
         <span id="foodType">음식 종류</span>
       </div>
+      <!-- 인스타 스타일 메뉴 점 3개 -->
+      <div class="card-header-menu">⋯</div>
       <div class="card-header-right" onclick="showRecommendation()">
         <img src="icons/more.svg" alt="더보기" class="icon" />
       </div>
@@ -197,7 +210,7 @@
 
       if (resultScreen.style.display === 'flex') {
         resultScreen.classList.remove('fade-in');
-        void resultScreen.offsetWidth; // 애니메이션 재적용용 트릭
+        void resultScreen.offsetWidth;
         resultScreen.classList.add('fade-in');
       } else {
         startScreen.style.display = 'none';
@@ -225,6 +238,7 @@
   </script>
 </body>
 </html>
+
 
 
 
