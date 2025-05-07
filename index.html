@@ -34,6 +34,22 @@
       padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
 
+    /* 버튼 스타일 */
+    .btn {
+      background: transparent; border: none;
+      color: #0D3F67; font-size: 2.4rem;
+      font-weight: 900; cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    .btn:active { transform: scale(0.95); }
+
+    /* 페이드인 애니메이션 */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.3s ease-out; }
+
     /* 시작 화면 */
     #startScreen {
       display: flex; flex-direction: column;
@@ -46,9 +62,9 @@
       margin-bottom: 10px;
     }
 
-    /* 완벽한 원을 위한 padding-top 트릭 */
+    /* 완벽한 원형 아이콘 */
     .circle {
-      width: 80vw; 
+      width: 80vw;
       max-width: 300px;
       position: relative;
       background-color: #81d4fa;
@@ -59,7 +75,7 @@
     .circle::before {
       content: "";
       display: block;
-      padding-top: 100%; /* 세로 비율을 가로의 100%로 설정 */
+      padding-top: 100%; /* width만큼 높이 설정 */
     }
     .circle img {
       position: absolute;
@@ -77,29 +93,13 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
       margin-bottom: 20px;
     }
-    .btn {
-      background: transparent; border: none;
-      color: #0D3F67; font-size: 2.4rem;
-      font-weight: 900; cursor: pointer;
-      transition: transform 0.1s ease;
-    }
-    .btn:active { transform: scale(0.95); }
-
-    /* 페이드인 애니메이션 */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      animation: fadeInUp 0.3s ease-out;
-    }
 
     /* 결과 카드 */
     #resultScreen {
       display: none; flex-direction: column;
       align-items: flex-start; width: 90%; max-width: 400px;
       background: #ffffff; border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1), 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1),
                   0 12px 24px rgba(0,0,0,0.08);
       overflow: hidden; margin: 60px 0 40px;
     }
@@ -123,13 +123,8 @@
       display: flex; flex-direction: column;
       align-items: flex-start; text-align: left;
     }
-    .place-info strong {
-      font-size: 18px; color: #222;
-    }
-    .place-info span {
-      font-size: 12px; color: #666;
-      margin-top: 2px;
-    }
+    .place-info strong { font-size: 18px; color: #222; }
+    .place-info span { font-size: 12px; color: #666; margin-top: 2px; }
     .card-header-right {
       margin-left: auto; font-size: 1.6rem;
       line-height: 1; color: #999;
@@ -190,7 +185,18 @@
   <script>
     const restaurants = [
       { name: '델브리또', type: '양식', img: '델브리또.jpg' },
-      /* …생략… */
+      { name: '어니언스치킨', type: '양식', img: '어니언스치킨.jpg' },
+      { name: '짬뽕공장', type: '중식', img: '짬뽕공장.jpg' },
+      { name: '류헤이', type: '일식', img: '류헤이.jpg' },
+      { name: '진미식당', type: '한식', img: '진미식당.jpg' },
+      { name: '끄티식당', type: '일식', img: '끄티식당.jpg' },
+      { name: '창평돼지국밥', type: '한식', img: '창평돼지국밥.jpg' },
+      { name: '하동돈가스', type: '일식', img: '하동돈가스.jpg' },
+      { name: '경아네집밥', type: '한식', img: '경아네집밥.jpg' },
+      { name: '반천촌국수', type: '한식', img: '반천촌국수.jpg' },
+      { name: '개척돈가스', type: '일식', img: '개척돈가스.jpg' },
+      { name: '밀밭수제비', type: '한식', img: '밀밭수제비.jpg' },
+      { name: '남매컵밥', type: '한식', img: '남매컵밥.jpg' },
       { name: '스시하루', type: '일식', img: '스시하루.jpg' }
     ];
     const startScreen = document.getElementById('startScreen');
