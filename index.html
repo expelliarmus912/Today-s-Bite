@@ -11,14 +11,12 @@
       src: url('./fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
       font-display: swap;
     }
-
     html, body, * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Cafe24Ssurround', sans-serif;
     }
-
     body {
       height: 100vh;
       background-color: #b3e5fc;
@@ -69,9 +67,11 @@
       color: #0D3F67;
       margin-bottom: 10px;
     }
+    /* ●●● 원형 아이콘: 변수로 1:1 비율 고정 ●●● */
     .circle {
-      width: 300px;
-      height: 300px;
+      --circle-size: clamp(250px, 60vw, 400px);
+      width: var(--circle-size);
+      height: var(--circle-size);
       background-color: #81d4fa;
       border-radius: 50%;
       overflow: hidden;
@@ -118,10 +118,11 @@
       border-bottom: 1px solid #eee;
     }
 
-    /* 흰색 아이콘 배경 영역 크기 60px로 줄이고 간격 유지 */
+    /* ●●● 흰색 아이콘 배경: 변수로 1:1 비율 고정 ●●● */
     .circle-icon {
-      width: 68px;
-      height: 68px;
+      --icon-size: clamp(48px, 12vw, 68px);
+      width: var(--icon-size);
+      height: var(--icon-size);
       border-radius: 50%;
       overflow: hidden;
       background-color: #ffffff;
@@ -142,7 +143,7 @@
       align-items: flex-start;
       text-align: left;
     }
-    /* 식당 이름 글자 크기 증가 */
+    /* 식당 이름 글자 크기 */
     .place-info strong {
       font-size: 18px;
       color: #222;
@@ -163,12 +164,16 @@
       padding: 4px;
     }
 
+    /* ●●● 카드 이미지: 패딩 트릭으로 정사각 고정 ●●● */
     .card-img-container {
       width: 100%;
+      position: relative;
+      padding-bottom: 100%;
       background-color: #e0f7fa;
-      aspect-ratio: 1 / 1;
     }
     .card-img-container img {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -241,8 +246,7 @@
     const resultScreen = document.getElementById('resultScreen');
     let recentPicks = [];
     function getUniqueRecommendation() {
-      let pick;
-      let attempts = 0;
+      let pick, attempts = 0;
       do {
         pick = restaurants[Math.floor(Math.random() * restaurants.length)];
         attempts++;
@@ -284,6 +288,7 @@
   </script>
 </body>
 </html>
+
 
 
 
