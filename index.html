@@ -5,6 +5,16 @@
   <title>오늘 뭐 먹지?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <!-- PWA 매니페스트 연결 -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0D3F67">
+
+  <!-- iOS 홈 화면 설치 지원 -->
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <style>
     @font-face {
       font-family: 'Cafe24Ssurround';
@@ -118,7 +128,7 @@
       border-bottom: 1px solid #eee;
     }
 
-    /* 흰색 아이콘 배경 영역 크기 60px로 줄이고 간격 유지 */
+    /* 흰색 아이콘 배경 영역 크기 68px, 간격 유지 */
     .circle-icon {
       width: 68px;
       height: 68px;
@@ -142,7 +152,6 @@
       align-items: flex-start;
       text-align: left;
     }
-    /* 식당 이름 글자 크기 증가 */
     .place-info strong {
       font-size: 18px;
       color: #222;
@@ -221,6 +230,7 @@
       <span onclick="shareResult()">공유하기</span>
     </div>
   </div>
+
   <script>
     const restaurants = [
       { name: '델브리또', type: '양식', img: '델브리또.jpg' },
@@ -236,7 +246,7 @@
       { name: '개척돈가스', type: '일식', img: '개척돈가스.jpg' },
       { name: '밀밭수제비', type: '한식', img: '밀밭수제비.jpg' },
       { name: '남매컵밥', type: '한식', img: '남매컵밥.jpg' },
-       { name: '스시하루', type: '일식', img: '스시하루.jpg' }
+      { name: '스시하루', type: '일식', img: '스시하루.jpg' }
     ];
     const startScreen = document.getElementById('startScreen');
     const resultScreen = document.getElementById('resultScreen');
@@ -280,6 +290,17 @@
             alert('이 브라우저에서는 이미지 공유를 지원하지 않습니다.');
           }
         });
+      });
+    }
+  </script>
+
+  <!-- 서비스워커 등록 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('SW 등록 성공:', reg))
+          .catch(err => console.error('SW 등록 실패:', err));
       });
     }
   </script>
