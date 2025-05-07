@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <style>
+    /* 커스텀 폰트 */
     @font-face {
       font-family: 'Cafe24Ssurround';
       src: url('./fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
       font-display: swap;
     }
+    /* 기본 reset */
     html, body, * {
       margin: 0;
       padding: 0;
@@ -67,24 +69,30 @@
       color: #0D3F67;
       margin-bottom: 10px;
     }
-    /* ●●● 원형 아이콘: 변수로 1:1 비율 고정 ●●● */
+
+    /* 원형 컨테이너: pseudo-element로 정사각 유지 */
     .circle {
       --circle-size: clamp(250px, 60vw, 400px);
       width: var(--circle-size);
-      height: var(--circle-size);
-      background-color: #81d4fa;
+      position: relative;
       border-radius: 50%;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin: 10px 0 30px;
+      background-color: #81d4fa;
     }
-    .circle img {
+    .circle::before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+    .circle > img {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;
@@ -118,22 +126,25 @@
       border-bottom: 1px solid #eee;
     }
 
-    /* ●●● 흰색 아이콘 배경: 변수로 1:1 비율 고정 ●●● */
+    /* 아이콘 컨테이너: pseudo-element로 정사각 유지 */
     .circle-icon {
       --icon-size: clamp(48px, 12vw, 68px);
       width: var(--icon-size);
-      height: var(--icon-size);
+      position: relative;
       border-radius: 50%;
       overflow: hidden;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin-right: 8px;
+      background-color: #ffffff;
     }
-    .circle-icon img {
-      width: 100%;
-      height: 100%;
+    .circle-icon::before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+    .circle-icon > img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       object-fit: cover;
     }
 
@@ -143,7 +154,6 @@
       align-items: flex-start;
       text-align: left;
     }
-    /* 식당 이름 글자 크기 */
     .place-info strong {
       font-size: 18px;
       color: #222;
@@ -164,18 +174,17 @@
       padding: 4px;
     }
 
-    /* ●●● 카드 이미지: 패딩 트릭으로 정사각 고정 ●●● */
+    /* 카드 이미지 컨테이너: 패딩 트릭으로 정사각 유지 */
     .card-img-container {
       width: 100%;
       position: relative;
-      padding-bottom: 100%;
+      padding-top: 100%;
       background-color: #e0f7fa;
     }
-    .card-img-container img {
+    .card-img-container > img {
       position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
     }
 
@@ -207,6 +216,7 @@
       <button class="btn" onclick="showRecommendation()">추천받기</button>
     </div>
   </div>
+
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
@@ -226,6 +236,7 @@
       <span onclick="shareResult()">공유하기</span>
     </div>
   </div>
+
   <script>
     const restaurants = [
       { name: '델브리또', type: '양식', img: '델브리또.jpg' },
@@ -242,9 +253,11 @@
       { name: '밀밭수제비', type: '한식', img: '밀밭수제비.jpg' },
       { name: '남매컵밥', type: '한식', img: '남매컵밥.jpg' }
     ];
+
     const startScreen = document.getElementById('startScreen');
     const resultScreen = document.getElementById('resultScreen');
     let recentPicks = [];
+
     function getUniqueRecommendation() {
       let pick, attempts = 0;
       do {
@@ -255,11 +268,13 @@
       if (recentPicks.length > 3) recentPicks.shift();
       return pick;
     }
+
     function updateContent(pick) {
       document.getElementById('foodName').textContent = pick.name;
       document.getElementById('foodType').textContent = pick.type;
       document.getElementById('foodImage').src = pick.img;
     }
+
     function showRecommendation() {
       const pick = getUniqueRecommendation();
       updateContent(pick);
@@ -273,6 +288,7 @@
         resultScreen.classList.add('fade-in');
       }
     }
+
     function shareResult() {
       html2canvas(resultScreen).then(canvas => {
         canvas.toBlob(blob => {
