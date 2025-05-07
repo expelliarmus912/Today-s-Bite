@@ -30,7 +30,6 @@
       padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
     }
 
-    /* 버튼 스타일 */
     .btn {
       background: transparent;
       border: none;
@@ -44,7 +43,6 @@
       transform: scale(0.95);
     }
 
-    /* 페이드인 애니메이션 */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -53,7 +51,6 @@
       animation: fadeInUp 0.3s ease-out;
     }
 
-    /* 시작 화면 */
     #startScreen {
       display: flex;
       flex-direction: column;
@@ -70,11 +67,11 @@
       margin-bottom: 10px;
     }
 
-    /* 메인 아이콘 원형 – 더 크게 */
+    /* 메인 아이콘 – width와 height를 동일하게 지정 */
     .circle {
       /* 화면 너비의 70%를 기본으로, 최소 250px, 최대 450px */
       width: clamp(250px, 70vw, 450px);
-      aspect-ratio: 1 / 1;
+      height: clamp(250px, 70vw, 450px);
       background-color: #81d4fa;
       border-radius: 50%;
       overflow: hidden;
@@ -99,7 +96,6 @@
       margin-bottom: 20px;
     }
 
-    /* 결과 카드 */
     #resultScreen {
       display: none;
       flex-direction: column;
@@ -122,10 +118,10 @@
       border-bottom: 1px solid #eee;
     }
 
-    /* 식당 아이콘 원형 (card-header 안) */
+    /* 식당 아이콘도 width와 height 일치 */
     .circle-icon {
       width: clamp(48px, 10vw, 68px);
-      aspect-ratio: 1 / 1;
+      height: clamp(48px, 10vw, 68px);
       background-color: #ffffff;
       border-radius: 50%;
       overflow: hidden;
@@ -169,9 +165,14 @@
     .card-img-container {
       width: 100%;
       background-color: #e0f7fa;
-      aspect-ratio: 1 / 1;
+      /* 이미지 카드도 정사각형 */
+      height: 0;
+      padding-top: 100%;
+      position: relative;
     }
     .card-img-container img {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
