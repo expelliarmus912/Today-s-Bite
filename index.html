@@ -69,9 +69,11 @@
       color: #0D3F67;
       margin-bottom: 10px;
     }
+
+    /* 메인 아이콘 원형 - 모든 뷰포트 대응 */
     .circle {
-      width: 300px;
-      height: 300px;
+      width: clamp(150px, 50vw, 300px);
+      aspect-ratio: 1 / 1;
       background-color: #81d4fa;
       border-radius: 50%;
       overflow: hidden;
@@ -85,6 +87,7 @@
       height: 100%;
       object-fit: cover;
     }
+
     .btn-container {
       background-color: #ffffff;
       border-radius: 16px;
@@ -118,13 +121,13 @@
       border-bottom: 1px solid #eee;
     }
 
-    /* 흰색 아이콘 배경 영역 크기 60px로 줄이고 간격 유지 */
+    /* 식당 아이콘 원형 (card-header 안) */
     .circle-icon {
-      width: 68px;
-      height: 68px;
+      width: clamp(48px, 10vw, 68px);
+      aspect-ratio: 1 / 1;
+      background-color: #ffffff;
       border-radius: 50%;
       overflow: hidden;
-      background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -142,7 +145,6 @@
       align-items: flex-start;
       text-align: left;
     }
-    /* 식당 이름 글자 크기 증가 */
     .place-info strong {
       font-size: 18px;
       color: #222;
@@ -202,6 +204,7 @@
       <button class="btn" onclick="showRecommendation()">추천받기</button>
     </div>
   </div>
+
   <div id="resultScreen">
     <div class="card-header">
       <div class="circle-icon">
@@ -221,6 +224,7 @@
       <span onclick="shareResult()">공유하기</span>
     </div>
   </div>
+
   <script>
     const restaurants = [
       { name: '델브리또', type: '양식', img: '델브리또.jpg' },
@@ -236,14 +240,14 @@
       { name: '개척돈가스', type: '일식', img: '개척돈가스.jpg' },
       { name: '밀밭수제비', type: '한식', img: '밀밭수제비.jpg' },
       { name: '남매컵밥', type: '한식', img: '남매컵밥.jpg' },
-       { name: '스시하루', type: '일식', img: '스시하루.jpg' }
+      { name: '스시하루', type: '일식', img: '스시하루.jpg' }
     ];
     const startScreen = document.getElementById('startScreen');
     const resultScreen = document.getElementById('resultScreen');
     let recentPicks = [];
+
     function getUniqueRecommendation() {
-      let pick;
-      let attempts = 0;
+      let pick, attempts = 0;
       do {
         pick = restaurants[Math.floor(Math.random() * restaurants.length)];
         attempts++;
@@ -252,11 +256,13 @@
       if (recentPicks.length > 3) recentPicks.shift();
       return pick;
     }
+
     function updateContent(pick) {
       document.getElementById('foodName').textContent = pick.name;
       document.getElementById('foodType').textContent = pick.type;
       document.getElementById('foodImage').src = pick.img;
     }
+
     function showRecommendation() {
       const pick = getUniqueRecommendation();
       updateContent(pick);
@@ -270,6 +276,7 @@
         resultScreen.classList.add('fade-in');
       }
     }
+
     function shareResult() {
       html2canvas(resultScreen).then(canvas => {
         canvas.toBlob(blob => {
