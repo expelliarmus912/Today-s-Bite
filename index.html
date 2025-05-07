@@ -70,9 +70,10 @@
       margin-bottom: 10px;
     }
 
-    /* 메인 아이콘 원형 - 모든 뷰포트 대응 */
+    /* 메인 아이콘 원형 - 사이즈 키운 버전 */
     .circle {
-      width: clamp(150px, 50vw, 300px);
+      /* 화면 너비의 60%를 기본으로, 최소 200px, 최대 400px */
+      width: clamp(200px, 60vw, 400px);
       aspect-ratio: 1 / 1;
       background-color: #81d4fa;
       border-radius: 50%;
@@ -292,3 +293,4 @@
   </script>
 </body>
 </html>
+
